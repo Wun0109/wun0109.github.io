@@ -240,5 +240,8 @@ ul {
 }
 
 .contact-social a:hover {
+
+  list-style: none;
+
   color: #3b5773;
 }
