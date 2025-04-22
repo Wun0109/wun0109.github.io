@@ -1,4 +1,4 @@
-/* 🌿 清新沉穩風格 CSS + 歡迎區塊 + emoji樣式 + 分類專屬圖示 */
+/* 🌿 清新沉穩風格 CSS + 語錄 + 關於我區塊 + emoji分類樣式 + 個人標籤互動 */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
 
@@ -73,11 +73,82 @@ nav ul li a:hover {
   color: #3b5773;
 }
 
+.welcome-section blockquote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #777;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .welcome-section p {
   font-size: 1.1rem;
   color: #555;
   max-width: 700px;
   margin: 0 auto;
+}
+
+.about-section img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.about-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.about-tags li {
+  background-color: #e4e9f0;
+  color: #2c3e50;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: default;
+}
+
+.about-tags li:hover {
+  background-color: #d2dae4;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .about-photo {
+    flex: 1;
+    text-align: center;
+  }
+  .about-text {
+    flex: 2;
+  }
 }
 
 section {
@@ -136,7 +207,6 @@ ul {
   color: #2c3e50;
 }
 
-/* ✅ emoji icon 分類樣式 */
 .project-card.strategy h3::before { content: '📊 '; }
 .project-card.speech h3::before { content: '🗣️ '; }
 .project-card.volunteer h3::before { content: '🌍 '; }
@@ -240,8 +310,5 @@ ul {
 }
 
 .contact-social a:hover {
-
-  list-style: none;
-
   color: #3b5773;
 }
