@@ -22,6 +22,54 @@
     100% { opacity: 1; }
   }
 
+  /* 🌿 清新沉穩風格 CSS + 自動展開 .project-detail + 滑出動畫 */
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Noto Sans TC', '微軟正黑體', Arial, sans-serif;
+    line-height: 1.8;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+    padding-bottom: 4rem;
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+.project-detail {
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.6s ease-out forwards;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+
+  
   header, footer {
     background-color: #3b5773;
     color: #fff;
@@ -312,3 +360,44 @@
   .contact-social a:hover {
     color: #3b5773;
   }
+
+.toggle-detail {
+  background-color: transparent;
+  border: none;
+  color: #3b5773;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  display: none; /* 預設隱藏 */
+}
+
+.project-card:hover .toggle-detail {
+  display: block; /* 滑進來才顯示 */
+}
+
+.toggle-detail:hover {
+  color: #2f445d;
+  text-decoration: underline;
+}
+
+.project-detail {
+  display: none;
+}
+
+.project-detail {
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
