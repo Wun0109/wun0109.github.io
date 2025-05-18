@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube 串流播放 × OpenCV</title>
+  <link href="../style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .title-bar {
+      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .content-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      font-weight: bold;
+      color: #3b5773;
+      border-bottom: 2px solid #3b5773;
+      padding-bottom: 0.4rem;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    .info-group {
+      text-align: left;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding-left: 0;
+    }
+
+    .info-group p {
+      margin: 0.2rem 0;
+    }
+
+    .code-container {
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      position: relative;
+      text-align: left;
+    }
+
+    .code-container details summary {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      color: #3b5773;
+    }
+
+    .code-container pre {
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #3b5773;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      background-color: #2c3e50;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #3b5773;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title-bar">
+    <h1>YouTube 串流播放 × OpenCV</h1>
+  </div>
+
+  <section class="welcome-section content-section text-start">
+    <div class="info-group">
+      <p>📌 <strong>技術工具：</strong>：Python、OpenCV、yt_dlp</p>
+      <p>🎯 <strong>應用情境：</strong>：遠端監控、影像資料集建構、教學演示</p>
+    </div>
+
+    <h2 class="section-heading">功能簡介</h2>
+    <p class="info-group">這個專案展示如何結合 yt_dlp 與 OpenCV，擷取 YouTube 串流影片並進行即時顯示。透過這種整合，使用者能將網路影片視為即時影像來源，進一步應用於 AI
+      模型訓練或影像分析。</p>
+
+    <h2 class="section-heading">介面截圖</h2>
+    <img src="../images/youtube_demo.png" alt="串流播放畫面" class="img-fluid rounded mb-4" style="max-height: 400px;" />
+
+    <h2 class="section-heading">程式碼片段</h2>
+    <div class="code-container">
+      <button class="copy-btn" onclick="copyCode(this)">複製</button>
+      <details open>
+        <summary>📄 AI013｜直接串流播放 YouTube 影片</summary>
+        <pre><code id="code-block">import cv2
+import yt_dlp
+video_url = "https://www.youtube.com/watch?v=z_fY1pj1VBw"
+ydl_opts = {'format': 'best', 'quiet': True}
+with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    info_dict = ydl.extract_info(video_url, download=False)
+stream_url = info_dict['url']
+cap = cv2.VideoCapture(stream_url)
+while cap.isOpened():
+    ret, frame = cap.read()
+    frame = cv2.resize(frame, (960, 540))
+    cv2.imshow('Stream', frame)
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+      </details>
+    </div>
+
+    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+  </section>
+
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling.querySelector('code');
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = '✅ 已複製';
+        setTimeout(() => { button.innerText = '複製'; }, 1500);
+      });
+    }
+  </script>
+</body>
+
+</html>

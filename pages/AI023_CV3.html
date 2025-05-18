@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>圖片裁切與畫面區塊比較</title>
+  <link href="../style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .title-bar {
+      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .content-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      font-weight: bold;
+      color: #3b5773;
+      border-bottom: 2px solid #3b5773;
+      padding-bottom: 0.4rem;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    .info-group {
+      text-align: left;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding-left: 0;
+    }
+
+    .info-group p {
+      margin: 0.2rem 0;
+    }
+
+    .code-container {
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      position: relative;
+      text-align: left;
+    }
+
+    .code-container details summary {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      color: #3b5773;
+    }
+
+    .code-container pre {
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #3b5773;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      background-color: #2c3e50;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #3b5773;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-bar">
+    <h1>圖片裁切與畫面區塊比較</h1>
+  </div>
+
+  <section class="welcome-section">
+    <div class="info-group">
+      <p>📌 <strong>技術工具：</strong>：Python、OpenCV</p>
+      <p>🎯 <strong>應用情境：</strong>：區域感知、特定畫面偵測、目標裁切視覺化</p>
+    </div>
+
+    <h2 class="section-heading">功能簡介</h2>
+    <p class="info-group">本程式從原始圖片中裁切特定區域，並同時顯示原圖與裁切後圖像，讓使用者能夠直觀比較。這對於影像處理中區域辨識與裁切座標理解非常有幫助。</p>
+
+    <h2 class="section-heading">成果展示</h2>
+    <div class="image-box">
+      <img src="/images/crop_demo.png" alt="裁切原圖與區塊畫面比較示意圖" />
+      <figcaption>▲ 主視窗為完整圖片，左上角為裁切出來的局部區塊，方便觀察區域細節與座標效果</figcaption>
+    </div>
+
+    <h2 class="section-heading">程式碼片段</h2>
+    <div class="code-container">
+      <button class="copy-btn" onclick="copyCode(this)">複製</button>
+      <details open>
+        <summary>📄 AI023｜圖片裁切與畫面區塊比較</summary>
+          <pre><code id="code-block">import cv2
+
+img = cv2.imread("../pic/cat_and_dog.jpg")
+img = cv2.resize(img, (800, 480))
+
+# 裁切區域設定：y從210~460，x從160~360
+imgCropped = img[210:460, 160:360]
+
+print("原圖尺寸：", img.shape)
+print("裁切後尺寸：", imgCropped.shape)
+
+cv2.imshow("A11408001_AI023", img)
+cv2.imshow("裁切區塊", imgCropped)
+cv2.waitKey(0)</code></pre>
+    </div>
+
+    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+  </section>
+
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling.querySelector('code');
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = '✅ 已複製';
+        setTimeout(() => { button.innerText = '複製'; }, 1500);
+      });
+    }
+  </script>
+  
+</body>
+</html>

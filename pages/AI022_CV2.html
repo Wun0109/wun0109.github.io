@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>灰階模糊與邊緣檢測拼圖</title>
+  <link href="../style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .title-bar {
+      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .content-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      font-weight: bold;
+      color: #3b5773;
+      border-bottom: 2px solid #3b5773;
+      padding-bottom: 0.4rem;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    .info-group {
+      text-align: left;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding-left: 0;
+    }
+
+    .info-group p {
+      margin: 0.2rem 0;
+    }
+
+    .code-container {
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      position: relative;
+      text-align: left;
+    }
+
+    .code-container details summary {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      color: #3b5773;
+    }
+
+    .code-container pre {
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #3b5773;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      background-color: #2c3e50;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #3b5773;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+
+
+</head>
+<body>
+  <div class="title-bar">
+    <h1>灰階模糊與邊緣檢測拼圖</h1>
+  </div>
+
+  <section class="welcome-section">
+    <div class="info-group">
+      <p>📌 <strong>技術工具：</strong>：Python、OpenCV、NumPy</p>
+      <p>🎯 <strong>應用情境：</strong>：影像處理前處理流程展示與圖像視覺化輸出</p>
+    </div>
+
+    <h2 class="section-heading">功能簡介</h2>
+    <p class="info-group">
+      此程式展示了圖像處理的常見步驟：轉為灰階、模糊處理（Gaussian Blur）與邊緣偵測（Canny），最後透過 NumPy 水平與垂直堆疊方式輸出一張組合圖像，
+      利於觀察處理前後效果。
+    </p>
+
+    <h2 class="section-heading">成果展示</h2>
+    <div class="image-box">
+      <img src="/images/cv2_edge_stack.jpg.png" alt="影像處理堆疊拼圖示意圖" />
+      <figcaption>
+        ▲ 這張圖片為 3 種處理效果（灰階、模糊、邊緣偵測）依序排列，並做兩層拼圖組合，直觀比較處理差異
+      </figcaption>
+    </div>
+
+    <h2 class="section-heading">程式碼片段</h2>
+    <div class="code-container">
+      <button class="copy-btn" onclick="copyCode(this)">複製</button>
+      <details open>
+        <summary>📄 AI022｜灰階模糊與邊緣檢測拼圖</summary>
+        <pre><code># AI022_CV2.py
+    import cv2
+    import numpy as np
+
+    img = cv2.imread("../pic/cat_and_dog.jpg")
+    img = cv2.resize(img, (320, 200))
+    imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    imgBlur = cv2.GaussianBlur(imgGray, (7, 7), 0)
+    imgCanny = cv2.Canny(img, 300, 300)
+
+    imghor = np.hstack((imgGray, imgBlur, imgCanny))
+    imgver = np.vstack((imghor, imghor))
+
+    cv2.imshow("A11408001_AI022_all", imgver)
+    cv2.waitKey(0)</code></pre>
+      </details>
+      <button class="copy-btn" onclick="copyCode(this)">複製</button>
+    </div>
+
+
+    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+
+    <script>
+      function copyCode(button) {
+        const codeBlock = button.nextElementSibling.querySelector('code');
+        const text = codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          button.innerText = '✅ 已複製';
+          setTimeout(() => { button.innerText = '複製'; }, 1500);
+        });
+      }
+    </script>
+    
+    </body>
+    </html>

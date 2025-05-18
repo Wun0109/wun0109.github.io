@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pose 姿勢偵測 × 動作互動分析</title>
+  <link href="../style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .title-bar {
+      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .content-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      font-weight: bold;
+      color: #3b5773;
+      border-bottom: 2px solid #3b5773;
+      padding-bottom: 0.4rem;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    .info-group {
+      text-align: left;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding-left: 0;
+    }
+
+    .info-group p {
+      margin: 0.2rem 0;
+    }
+
+    .code-container {
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      position: relative;
+      text-align: left;
+    }
+
+    .code-container details summary {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      color: #3b5773;
+    }
+
+    .code-container pre {
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #3b5773;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      background-color: #2c3e50;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #3b5773;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-bar">
+    <h1>Pose 姿勢偵測 × 動作互動分析</h1>
+  </div>
+  <section class="welcome-section">
+    <div class="info-group">
+      <p>📌 <strong>技術工具：</strong>MediaPipe Pose、DrawingUtils、角度判斷、np.interp、YouTube 串流</p>
+      <p>🎯 <strong>應用情境：</strong>遠距健身教練、運動姿勢分析、手勢辨識與互動遊戲開發</p>
+    </div>
+
+    <h2 class="section-heading">功能簡介</h2>
+    <p class="info-group">
+      本專案整合 <strong>MediaPipe Pose</strong> 技術，建構出一套完整的 <strong>人體姿勢偵測與互動分析系統</strong>，可應用於多種影像來源，包含：
+      <br><br>
+      <strong>即時攝影機輸入（AI071）</strong>：可應用於 <strong>遠距教學</strong> 或 <strong>現場互動展示</strong>，即時呈現使用者的骨架動作。<br>
+      <strong>自錄影片分析（AI072）</strong>：提供 <strong>雙視窗比對畫面</strong>，用於 <strong>體能檢測回顧</strong> 或 <strong>姿勢教學影片製作</strong>。<br>
+      <strong>YouTube 串流姿勢辨識（AI073）</strong>：可應用於 <strong>網路健身課程輔助</strong>，即時分析公開影片中的動作。<br>
+      <strong>手臂彎舉角度與次數統計（AI074）</strong>：適用於 <strong>健身動作計數</strong>、<strong>動作品質評估</strong> 與 <strong>視覺化回饋設計</strong>。<br><br>
+      整體系統不僅支援 <strong>骨架視覺化標記</strong>，也能透過 <strong>角度判斷與條狀圖呈現</strong>，提供使用者清晰的訓練進度與動作表現回饋。此技術具備高度延伸性，未來可拓展至 <strong>健身監控系統</strong>、<strong>個人運動教練平台</strong>、<strong>互動式課程開發</strong> 等多元場景。
+
+    </p>
+
+
+    <div class="image-box">
+      <img src="../images/pose_black1.png" alt="pose2 黑底對照" />
+      <figcaption>▲ 自錄影片輸入：人物動作姿勢偵測與黑底標記對照顯示</figcaption>
+    </div>
+    <div class="image-box">
+      <img src="../images/pose_black2.png" alt="pose2 黑底對照2" />
+      <figcaption>▲ YouTube 串流來源：從網路影片即時取得畫面並進行骨架辨識</figcaption>
+    </div>
+    <div class="image-box">
+      <img src="../images/pose_count.png" alt="pose 手勢彎舉統計" />
+      <figcaption>▲ 實作左右手彎舉角度偵測，並加上計數器與條狀圖動態回饋</figcaption>
+    </div>
+
+    <section class="content-section">
+
+      <h2 class="section-heading">程式碼片段</h2>
+
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI071｜即時攝影機姿勢偵測</summary>
+          <pre><code>import cv2
+      import mediapipe as mp
+
+      conn = mp.solutions.pose.POSE_CONNECTIONS
+      pose = mp.solutions.pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+      mpd = mp.solutions.drawing_utils
+      spec = mp.solutions.drawing_styles.get_default_pose_landmarks_style()
+
+      cap = cv2.VideoCapture(0)
+      while cap.isOpened():
+        success, image = cap.read()
+        imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = pose.process(imgrgb)
+        if results.pose_landmarks:
+            mpd.draw_landmarks(image, results.pose_landmarks, conn, spec)
+        cv2.imshow('M11508001_pose1', image)
+        if cv2.waitKey(5) & 0xFF == 27:
+            break
+      cap.release()
+      cv2.destroyAllWindows()</code></pre>
+        </details>
+      </div>
+
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI072｜自錄影片骨架偵測</summary>
+          <pre><code>import cv2
+      import mediapipe as mp
+      import numpy as np
+
+      conn = mp.solutions.pose.POSE_CONNECTIONS
+      pose = mp.solutions.pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+      mpd = mp.solutions.drawing_utils
+      spec = mp.solutions.drawing_styles.get_default_pose_landmarks_style()
+
+      cap = cv2.VideoCapture('../video/CCC.mp4')
+      while cap.isOpened():
+        success, image = cap.read()
+        imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        bkb = np.zeros(image.shape, dtype=np.uint8)
+        results = pose.process(imgrgb)
+        if results.pose_landmarks:
+            mpd.draw_landmarks(image, results.pose_landmarks, conn, spec)
+            mpd.draw_landmarks(bkb, results.pose_landmarks, conn, spec)
+        cv2.imshow('B11108029_pose2', image)
+        cv2.imshow('B11108029_pose2 Black', bkb)
+        if cv2.waitKey(5) & 0xFF == 27:
+          break
+      cap.release()
+      cv2.destroyAllWindows()</code></pre>
+        </details>
+      </div>
+
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI073｜YouTube 姿勢辨識</summary>
+          <pre><code>import cv2
+      import mediapipe as mp
+      import numpy as np
+      import yt_dlp
+
+      conn = mp.solutions.pose.POSE_CONNECTIONS
+      pose = mp.solutions.pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+      mpd = mp.solutions.drawing_utils
+      spec = mp.solutions.drawing_styles.get_default_pose_landmarks_style()
+
+      video_url = "https://youtu.be/XWPnwR3YiuI?si=Cb1VWAbex5n8NuFV"
+      ydl_opts = {'format': 'best',  'quiet': True }
+      with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        info_dict = ydl.extract_info(video_url, download=False)
+      stream_url = info_dict['url']
+
+      cap = cv2.VideoCapture(stream_url)
+      while cap.isOpened():
+        success, image = cap.read()
+        image = cv2.resize(image, (520, 300))
+        imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        bkb = np.zeros(image.shape, dtype=np.uint8)
+        results = pose.process(imgrgb)
+        if results.pose_landmarks:
+            mpd.draw_landmarks(image, results.pose_landmarks, conn, spec)
+            mpd.draw_landmarks(bkb, results.pose_landmarks, conn, spec)
+        cv2.imshow('B11108029_pose2', image)
+        cv2.imshow('B11108029_pose2 Black', bkb)
+        if cv2.waitKey(5) & 0xFF == 27:
+          break
+      cap.release()
+      cv2.destroyAllWindows()</code></pre>
+        </details>
+      </div>
+
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI074｜手勢角度、彎舉次數計算</summary>
+          <pre><code>import cv2
+            import mediapipe as mp
+            import numpy as np
+            import math
+
+            pose = mp.solutions.pose.Pose()
+            conn = mp.solutions.pose.POSE_CONNECTIONS
+            mpd = mp.solutions.drawing_utils
+            spec = mp.solutions.drawing_styles.get_default_pose_landmarks_style()
+
+            switch_right, switch_left = 0, 0
+            count_right, count_left = 0, 0
+            color_right, color_left = (0, 0, 255), (0, 0, 255)
+
+            cap = cv2.VideoCapture(0)
+            while cap.isOpened():
+              success, image = cap.read()
+              imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+              results = pose.process(imgrgb)
+              h, w, c = image.shape
+              xx1 = int(w * 0.1)
+              xx2 = int(w * 0.7)
+              poslist = []
+
+              if results.pose_landmarks:
+                  mpd.draw_landmarks(image, results.pose_landmarks, conn, spec)
+                  for id, lm in enumerate(results.pose_landmarks.landmark):
+                      cx, cy = int(lm.x * w), int(lm.y * h)
+                      poslist.append([id, cx, cy])
+
+              try:
+                  x1, y1 = poslist[12][1], poslist[12][2]
+                  x2, y2 = poslist[14][1], poslist[14][2]
+                  x3, y3 = poslist[16][1], poslist[16][2]
+
+                  right_angle = abs(int(math.degrees(math.atan2(y1 - y2, x1 - x2) - math.atan2(y3 - y2, x3 - x2))))
+
+                  x1l, y1l = poslist[11][1], poslist[11][2]
+                  x2l, y2l = poslist[13][1], poslist[13][2]
+                  x3l, y3l = poslist[15][1], poslist[15][2]
+
+                  left_angle = abs(int(math.degrees(math.atan2(y1l - y2l, x1l - x2l) - math.atan2(y3l - y2l, x3l - x2l))))
+
+                  right_per = np.interp(right_angle, (10, 170), (100, 0))
+                  right_bar = int(np.interp(right_angle, (10, 170), (200, 400)))
+                  left_per = np.interp(left_angle, (10, 170), (100, 0))
+                  left_bar = int(np.interp(left_angle, (10, 170), (200, 400)))
+
+                  cv2.rectangle(image, (xx1, int(right_bar)), (xx1 + 30, 400), color_right, cv2.FILLED)
+                  cv2.putText(image, str(int(right_per)) + '%', (xx1 - 10, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, color_right, 2)
+
+                  cv2.rectangle(image, (xx2, int(left_bar)), (xx2 + 30, 400), color_left, cv2.FILLED)
+                  cv2.putText(image, str(int(left_per)) + '%', (xx2 - 10, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, color_left, 2)
+
+                  if right_per >= 95:
+                      color_right = (0, 255, 0)
+                      if switch_right == 0:
+                          count_right += 0.5
+                          switch_right = 1
+                  if right_per <= 5:
+                      if switch_right == 1:
+                          count_right += 0.5
+                          switch_right = 0
+
+                  if left_per >= 95:
+                      color_left = (0, 100, 10)
+                      if switch_left == 0:
+                          count_left += 0.5
+                          switch_left = 1
+                  if left_per <= 5:
+                      if switch_left == 1:
+                          count_left += 0.5
+                          switch_left = 0
+
+              except:
+                  pass
+
+              cv2.putText(image, str(int(count_right)), (xx1 - 40, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 6)
+              cv2.putText(image, str(int(count_left)), (xx2 - 40, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, (120, 300, 0), 6)
+
+              cv2.imshow('B11108029_pose3', image)
+
+              if cv2.waitKey(5) & 0xFF == 27:
+                  break
+
+            cap.release()
+            cv2.destroyAllWindows()
+code></pre>
+        </details>
+      </div>
+
+
+      <div class="project-card ai">
+        <h3>🖐️ 手部追蹤 × 指尖互動小遊戲</h3>
+        <p>以 MediaPipe Hands 進行即時手勢偵測與手指位置追蹤，並延伸互動遊戲設計。</p>
+        <a href= "/pages/AI08X_hand.html" class="btn btn-outline-primary mt-2">查看更多</a>
+      </div>
+      
+      <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+    </section>
+    
+    <script>
+      function copyCode(button) {
+        const codeBlock = button.nextElementSibling.querySelector('code');
+        const text = codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          button.innerText = '✅ 已複製';
+          setTimeout(() => { button.innerText = '複製'; }, 1500);
+        });
+      }
+    </script>
+
+</body>
+</html>

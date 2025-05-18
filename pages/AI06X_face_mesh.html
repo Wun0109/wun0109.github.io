@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FaceMesh 臉部關鍵點應用</title>
+  <link href="../style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .title-bar {
+      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .content-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      font-weight: bold;
+      color: #3b5773;
+      border-bottom: 2px solid #3b5773;
+      padding-bottom: 0.4rem;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    .info-group {
+      text-align: left;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding-left: 0;
+    }
+
+    .info-group p {
+      margin: 0.2rem 0;
+    }
+
+    .code-container {
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      position: relative;
+      text-align: left;
+    }
+
+    .code-container details summary {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      color: #3b5773;
+    }
+
+    .code-container pre {
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #3b5773;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      background-color: #2c3e50;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #3b5773;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-bar">
+    <h1>FaceMesh 臉部關鍵點應用</h1>
+  </div>
+
+  <section class="welcome-section">
+    <div class="info-group">
+      <p>📌 <strong>技術工具：</strong>：MediaPipe FaceMesh、DrawingSpec、OpenCV、NumPy</p>
+      <p>🎯 <strong>應用情境：</strong>：人臉貼圖、表情互動、VTuber 基礎模型定位</p>
+    </div>
+
+    <h2 class="section-heading">功能簡介</h2>
+      <p class="info-group">
+        本專案運用 MediaPipe FaceMesh 技術，實作三組臉部特徵應用：
+        1️⃣ 臉部網格繪製、2️⃣ Tesselation vs 輪廓線條比較、3️⃣ 嘴部定位貼圖效果。
+        涵蓋從人臉偵測、關鍵點描繪到互動視覺應用設計，是 VTuber 動畫與 AR 表情技術的入門展示。
+      </p>
+
+    <h2 class="section-heading">展示圖片</h2>
+    <div class="image-box">
+      <img src="../images/facemesh_tesselation.png" alt="臉部網格" />
+      <figcaption>▲ FaceMesh Tesselation 全臉網格示意</figcaption>
+      <img src="../images/facemesh_comparison_dark.png" alt="網格與輪廓比較" />
+      <figcaption>▲ 左：Tesselation，右：Contours，背景為黑色</figcaption>
+      <img src="../images/facemesh_comparison_white.png" alt="網格與輪廓比較" />
+      <figcaption>▲ 左：Tesselation，右：Contours，背景為白色</figcaption>
+      <img src="../images/facemesh_overlay_mouth1.png" alt="嘴巴貼圖示意1" />
+      <figcaption>▲ 嘴巴動態貼圖 - 小嘴圖示</figcaption>
+      <img src="../images/facemesh_overlay_mouth2.png" alt="嘴巴貼圖示意2" />
+      <figcaption>▲ 嘴巴動態貼圖 - 誇張嘴型示意</figcaption>
+    </div>
+
+    <h2 class="section-heading">程式碼片段</h2>
+      <!-- 第一段 -->
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI061｜FaceMesh Tesselation</summary>
+          <pre><code>import cv2
+      import mediapipe as mp
+      mpd = mp.solutions.drawing_utils
+      mpfm = mp.solutions.face_mesh
+      cap = cv2.VideoCapture(0)
+      fm = mpfm.FaceMesh(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+      while cap.isOpened():
+          success, image = cap.read()
+          imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+          results = fm.process(imgrgb)
+          if results.multi_face_landmarks:
+              for f in results.multi_face_landmarks:
+                  mpd.draw_landmarks(image, f, mpfm.FACEMESH_TESSELATION)
+          cv2.imshow('faceLM1', image)
+          if cv2.waitKey(5) & 0xFF == 27:
+              break
+      cap.release()</code></pre>
+        </details>
+      </div>
+
+      <!-- 第二段 -->
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI062｜Tesselation vs Contours</summary>
+          <pre><code>import cv2
+      import mediapipe as mp
+      import numpy as np
+      mpd = mp.solutions.drawing_utils
+      mpfm = mp.solutions.face_mesh
+      cap = cv2.VideoCapture(0)
+      fm = mpfm.FaceMesh(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+      while cap.isOpened():
+          success, image = cap.read()
+          h, w = image.shape[:2]
+          blank = np.full((h, w, 3), 255, np.uint8)
+          imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+          results = fm.process(imgrgb)
+          if results.multi_face_landmarks:
+              for f in results.multi_face_landmarks:
+                  mpd.draw_landmarks(blank, f, mpfm.FACEMESH_TESSELATION)
+                  mpd.draw_landmarks(image, f, mpfm.FACEMESH_CONTOURS)
+          merged = np.hstack((blank, image))
+          cv2.imshow('faceLM2', merged)
+          if cv2.waitKey(5) & 0xFF == 27:
+              break
+      cap.release()</code></pre>
+        </details>
+      </div>
+
+      <!-- 第三段 -->
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">複製</button>
+        <details open>
+          <summary>📄 AI063｜嘴巴位置貼圖</summary>
+          <pre><code>import cv2
+      import mediapipe as mp
+      mpfm = mp.solutions.face_mesh
+      cap = cv2.VideoCapture(0)
+      face_mesh = mpfm.FaceMesh()
+      mouth_img = cv2.imread('m6.png')
+      while cap.isOpened():
+          success, image = cap.read()
+          h, w = image.shape[:2]
+          results = face_mesh.process(image)
+          if results.multi_face_landmarks:
+              for f in results.multi_face_landmarks:
+                  top = int(f.landmark[0].y * h)
+                  bottom = int(f.landmark[17].y * h)
+                  length = bottom - top
+                  resized = cv2.resize(mouth_img, (length * 3, length))
+                  cx = int(f.landmark[13].x * w - resized.shape[1] / 2)
+                  cy = int(((f.landmark[13].y + f.landmark[14].y) / 2) * h - resized.shape[0] / 2)
+                  image[cy:cy+resized.shape[0], cx:cx+resized.shape[1]] = resized
+          cv2.imshow('faceLM3', image)
+          if cv2.waitKey(5) & 0xFF == 27:
+              break
+      cap.release()</code></pre>
+        </details>
+      </div>
+
+    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+  </section>
+
+        <script>
+          function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+              button.innerText = '✅ 已複製';
+              setTimeout(() => { button.innerText = '複製'; }, 1500);
+            });
+          }
+        </script>
+
+</body>
+</html>

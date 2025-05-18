@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>手部追蹤 × 指尖互動小遊戲</title>
+  <link href="../style.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .title-bar {
+      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .content-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      font-weight: bold;
+      color: #3b5773;
+      border-bottom: 2px solid #3b5773;
+      padding-bottom: 0.4rem;
+    }
+
+    .image-box {
+      text-align: center;
+      margin: 1.5rem auto;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+
+    .info-group {
+      text-align: left;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding-left: 0;
+    }
+
+    .info-group p {
+      margin: 0.2rem 0;
+    }
+
+    .code-container {
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      position: relative;
+      text-align: left;
+    }
+
+    .code-container details summary {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      color: #3b5773;
+    }
+
+    .code-container pre {
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #3b5773;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:active {
+      background-color: #2c3e50;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      background-color: #3b5773;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-bar">
+    <h1>手部追蹤 × 指尖互動小遊戲動</h1>
+  </div>
+  <section class="welcome-section">
+    <div class="info-group">
+      <p>📌 <strong>技術工具：</strong>MediaPipe Hands、DrawingUtils、手指節點擷取、觸碰邏輯與亂數互動</p>
+      <p>🎯 <strong>應用情境：</strong>人體動作辨識、人機互動遊戲、觸控區域設計與控制應用</p>
+    </div>
+
+      <h2 class="section-heading">功能簡介</h2>
+      <p class="info-group">
+      本專案運用 MediaPipe Hands 技術，實作即時手部偵測與互動應用。首先透過手部關鍵點模型，精準擷取雙手 21 個節點位置並即時繪製骨架，建立穩定的追蹤基礎；進一步結合食指指尖的座標運算，設計出簡易「 <strong>指尖碰方塊</strong>」互動遊戲，讓使用者能以手勢直接與畫面元素進行碰觸與反應互動。此技術具備延伸潛力，可應用於人機介面控制、復健輔助訓練、互動藝術裝置與教育類遊戲等多元情境。
+         </p>
+    
+    <div class="image-box">
+      <img src="../images/W4P1.jpg" alt="AI081 視覺畫面" />
+      <figcaption>▲ 基本手勢偵測，標示掌節連線與節點</figcaption>
+    </div>
+    <div class="image-box">
+      <img src="../images/W4P2.jpg" alt="AI082 遊戲互動" />
+      <figcaption>▲ 建立隨機方塊區域，使用食指頂端進行觸碰辨識</figcaption>
+    </div>
+
+     <h2 class="section-heading">程式碼片段</h2>
+    <div class="code-container">
+      <button class="copy-btn" onclick="copyCode(this)">複製</button>
+      <details open>
+        <summary>📄 AI081｜基本手部偵測與繪製</summary>
+        <pre><code># AI081_hand1.py
+import cv2
+import mediapipe as mp
+
+mpd = mp.solutions.drawing_utils
+lm_style=mp.solutions.drawing_styles.get_default_hand_landmarks_style()
+conn_style=mp.solutions.drawing_styles.get_default_hand_connections_style()
+mphc = mp.solutions.hands.HAND_CONNECTIONS
+hands = mp.solutions.hands.Hands(model_complexity=0,  max_num_hands=2)
+
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    success, image = cap.read()
+    imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    results = hands.process(imgrgb)
+    if results.multi_hand_landmarks:
+        for h_landmarks in results.multi_hand_landmarks:
+            mpd.draw_landmarks(image, h_landmarks, mphc, lm_style, conn_style)
+    cv2.imshow('M10515005_hand1', image)
+    if cv2.waitKey(5) & 0xFF == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+      </details>
+    </div>
+
+    <div class="code-container">
+      <button class="copy-btn" onclick="copyCode(this)">複製</button>
+      <details>
+        <summary>📄 AI082｜指尖碰方塊互動遊戲</summary>
+        <pre><code># AI082_hand2.py
+import cv2
+import mediapipe as mp
+import random
+
+mpd = mp.solutions.drawing_utils
+lm_style = mp.solutions.drawing_styles.get_default_hand_landmarks_style()
+conn_style = mp.solutions.drawing_styles.get_default_hand_connections_style()
+mphc = mp.solutions.hands.HAND_CONNECTIONS
+hands = mp.solutions.hands.Hands(model_complexity=0, max_num_hands=2)
+
+cap = cv2.VideoCapture(0)
+run = True
+while cap.isOpened():
+    success, image = cap.read()
+    img = cv2.resize(image, (640, 420))
+    w, h = (img.shape[1], img.shape[0])
+    imgrgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    if run:
+        run = False
+        rx = random.randint(10, w - 80)
+        ry = random.randint(10, h - 80)
+    results = hands.process(imgrgb)
+    if results.multi_hand_landmarks:
+        for h_landmarks in results.multi_hand_landmarks:
+            mpd.draw_landmarks(img, h_landmarks, mphc, lm_style, conn_style)
+            x = h_landmarks.landmark[8].x * w
+            y = h_landmarks.landmark[8].y * h
+            if x > rx and x < (rx + 80) and y > ry and y < (ry + 80):
+                run = True
+    cv2.rectangle(img, (rx, ry), (rx + 80, ry + 80), (0, 0, 255), 5)
+    cv2.imshow('B11108029_hand2', cv2.flip(img, 1))
+    if cv2.waitKey(5) & 0xFF == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+      </details>
+    </div>
+
+    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+  </section>
+
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling.querySelector('code');
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = '✅ 已複製';
+        setTimeout(() => { button.innerText = '複製'; }, 1500);
+      });
+    }
+  </script>
+</body>
+</html>
