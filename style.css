@@ -1,0 +1,409 @@
+  /* 🌿 清新沉穩風格 CSS + 語錄 + 關於我區塊 + emoji分類樣式 + 個人標籤互動 */
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Noto Sans TC', '微軟正黑體', Arial, sans-serif;
+    line-height: 1.8;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+    padding-bottom: 4rem;
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* 🌿 清新沉穩風格 CSS + 自動展開 .project-detail + 滑出動畫 */
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Noto Sans TC', '微軟正黑體', Arial, sans-serif;
+    line-height: 1.8;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+    padding-bottom: 4rem;
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+.project-detail {
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.6s ease-out forwards;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+
+  
+  header, footer {
+    background-color: #3b5773;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+
+  nav ul li {
+    display: inline-block;
+    margin: 0 1rem;
+  }
+
+  nav ul li a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover {
+    color: #fef9e7;
+  }
+
+  .welcome-section {
+    background-color: #ffffff;
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    max-width: 900px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .welcome-section h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: #3b5773;
+  }
+
+  .welcome-section blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #777;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-section p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .about-section img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .about-tags li {
+    background-color: #e4e9f0;
+    color: #2c3e50;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: default;
+  }
+
+  .about-tags li:hover {
+    background-color: #d2dae4;
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .about-photo {
+      flex: 1;
+      text-align: center;
+    }
+    .about-text {
+      flex: 2;
+    }
+  }
+
+  section {
+    padding: 2rem;
+    margin: 1rem auto;
+    max-width: 800px;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    text-align: center;
+    border-bottom: 2px solid #3b5773;
+    padding-bottom: 0.5rem;
+  }
+
+  section h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    color: #34495e;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3rem;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .project-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    border-left: 5px solid #3b5773;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .project-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+
+  .project-card.strategy h3::before { content: '📊 '; }
+  .project-card.speech h3::before { content: '🗣️ '; }
+  .project-card.volunteer h3::before { content: '🌍 '; }
+  .project-card.creative h3::before { content: '💡 '; }
+  .project-card.default h3::before { content: '📌 '; }
+  .project-card.report h3::before { content: '📋 '; }
+
+  .project-card p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-card a.btn {
+    background-color: #3b5773;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  .project-card a.btn:hover {
+    background-color: #2f445d;
+  }
+
+  .project-card .badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    background-color: #f4d35e;
+    color: #2c3e50;
+    font-weight: bold;
+  }
+
+  .contact-section {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    margin: 3rem auto;
+    border-radius: 16px;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .contact-section:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-section h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #3b5773;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+  }
+
+  .contact-intro {
+    color: #555;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .contact-item {
+    font-size: 1.1rem;
+  }
+
+  .contact-item a {
+    color: #3b5773;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .contact-item a:hover {
+    text-decoration: underline;
+  }
+
+  .contact-social {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .contact-social a {
+    color: #2c3e50;
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+
+  .contact-social a:hover {
+    color: #3b5773;
+  }
+
+.toggle-detail {
+  background-color: transparent;
+  border: none;
+  color: #3b5773;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  display: none; /* 預設隱藏 */
+}
+
+.project-card:hover .toggle-detail {
+  display: block; /* 滑進來才顯示 */
+}
+
+.toggle-detail:hover {
+  color: #2f445d;
+  text-decoration: underline;
+}
+
+.project-detail {
+  display: none;
+}
+
+.project-detail {
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-card.ai {
+  border-left: 5px solid #6f42c1; /* 紫色強調 AI 類別 */
+  background-color: #f8f9fa;
+}
