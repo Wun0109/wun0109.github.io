@@ -1,164 +1,50 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>人臉偵測與五官定位繪製</title>
-  <link href="../style.css" rel="stylesheet" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f5f7fa;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .title-bar {
-      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .title-bar h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .content-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
-
-    .section-heading {
-      font-size: 1.25rem;
-      margin-top: 2.5rem;
-      font-weight: bold;
-      color: #3b5773;
-      border-bottom: 2px solid #3b5773;
-      padding-bottom: 0.4rem;
-    }
-
-    .image-box {
-      text-align: center;
-      margin: 1.5rem auto;
-    }
-
-    .image-box img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 0.5rem;
-    }
-
-    figcaption {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.25rem;
-    }
-
-    .info-group {
-      text-align: left;
-      max-width: 800px;
-      margin: 1rem auto;
-      padding-left: 0;
-    }
-
-    .info-group p {
-      margin: 0.2rem 0;
-    }
-
-    .code-container {
-      margin: 2rem 0;
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      position: relative;
-      text-align: left;
-    }
-
-    .code-container details summary {
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      color: #3b5773;
-    }
-
-    .code-container pre {
-      background: #f1f1f1;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #3b5773;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .copy-btn:active {
-      background-color: #2c3e50;
-    }
-
-    .back-btn {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #3b5773;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background-color: #2c3e50;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人臉偵測與五官定位繪製 | 潘佳妏 Wun</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../project.js" defer></script>
 </head>
 <body>
-  <div class="title-bar">
-    <h1>人臉偵測與五官定位繪製</h1>
-  </div>
+  <header>
+    <a class="brand" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> 程式應用</a>
+    <a class="back" href="../index.html">潘佳妏 Wun</a>
+  </header>
 
-  <section class="welcome-section">
-    <div class="info-group">
-      <p>📌  <strong>技術工具：</strong>：Python、MediaPipe、OpenCV</p>
-      <p>🎯  <strong>應用情境：</strong>：人臉辨識前處理、互動式臉部特效、教育用途的關鍵點標註</p>
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">AI05X</p>
+      <h1 class="project-title">人臉偵測與五官定位繪製</h1>
+      <p class="project-description">用 MediaPipe 即時偵測人臉，標出五官位置並做出卡通眼睛效果。</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><b>技術工具</b><span>Python、MediaPipe、OpenCV</span></div>
+        <div class="project-meta-item"><b>應用情境</b><span>人臉辨識前處理、互動式臉部特效、教育用途的關鍵點標註</span></div>
+      </div>
     </div>
 
-    <h2 class="section-heading">功能簡介</h2>
-    <p class="info-group">
-      本作品透過 MediaPipe 的 FaceDetection 模組，實作即時臉部偵測與定位。
-      初步畫出人臉框架後，進一步延伸以繪製「左右眼」、「鼻尖」、「嘴巴」、「雙耳」等五官位置，達成基礎視覺互動特效。
-    </p>
+    <section class="project-section">
+      <h2><i class="ti ti-info-circle" aria-hidden="true"></i>功能簡介</h2>
+      <p>本作品透過 MediaPipe 的 FaceDetection 模組，實作即時臉部偵測與定位。初步畫出人臉框架後，進一步延伸以繪製「左右眼」、「鼻尖」、「嘴巴」、「雙耳」等五官位置，達成基礎視覺互動特效。</p>
+    </section>
 
-    <div class="image-box">
-      <img src="/images/face_demo.JPG" alt="人臉偵測與繪製示意圖" />
-      <figcaption>▲ 展示畫面：畫出人臉框與眼睛、鼻子、嘴巴等關鍵部位，強化視覺理解</figcaption>
-    </div>
+    <section class="project-section">
+      <h2><i class="ti ti-photo" aria-hidden="true"></i>成果展示</h2>
+      <figure class="project-image">
+        <img src="../images/face_demo.JPG" alt="人臉偵測與繪製示意圖">
+        <figcaption>展示畫面：畫出人臉框與眼睛、鼻子、嘴巴等關鍵部位，強化視覺理解</figcaption>
+      </figure>
+    </section>
 
-    <h2 class="section-heading">程式碼片段</h2>
-    <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details open>
-        <summary>📄 AI05X｜臉部特徵視覺化 + 卡通眼睛效果</summary>
-      <pre><code id="code-block1">import cv2
+    <section class="project-section">
+      <h2><i class="ti ti-code" aria-hidden="true"></i>程式碼片段</h2>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI05X｜臉部特徵視覺化 + 卡通眼睛效果</summary>
+<pre><code>import cv2
 import mediapipe as mp
 
 face_detection = mp.solutions.face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5)
@@ -199,25 +85,16 @@ while cap.isOpened():
             cv2.circle(image, (fx, fy), 5, (255, 0, 255), -1)  # right ear
 
     cv2.imshow('M11505005_face2', image)
-    if cv2.waitKey(5) & 0xFF == 27:
+    if cv2.waitKey(5) &amp; 0xFF == 27:
         break
 cap.release()
 cv2.destroyAllWindows()</code></pre>
-    </div>
+        </details>
+      </div>
+    </section>
 
-    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
-  </section>
-
-  <script>
-    function copyCode(button) {
-      const codeBlock = button.nextElementSibling.querySelector('code');
-      const text = codeBlock.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        button.innerText = '✅ 已複製';
-        setTimeout(() => { button.innerText = '複製'; }, 1500);
-      });
-    }
-  </script>
-  
+    <div class="project-footer"><a class="btn" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到程式應用</a></div>
+  </main>
+  <footer>© 2026 潘佳妏 Wun</footer>
 </body>
 </html>
