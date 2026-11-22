@@ -54,3 +54,176 @@ footer{text-align:center;color:var(--muted);font-size:.92rem;padding:1rem}
 .toggle-detail{display:none}
 @media(max-width:720px){.hero{grid-template-columns:1fr}.photo{justify-self:start}.photo img{width:150px;height:150px}.dl{grid-template-columns:1fr}.panel,section{padding:1.4rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ===== Project detail pages (formerly project.css) ===== */
+
+/* ========================================
+   Project Detail Pages
+   延續首頁 style.css 的視覺設計
+======================================== */
+
+/* 頁面整體 */
+.project-main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 作品標題區 */
+.project-hero {
+  margin-top: 2rem;
+  padding: 2.2rem;
+}
+
+.project-eyebrow {
+  color: var(--blue-d);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.7rem;
+}
+
+.project-title {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+}
+
+.project-description {
+  color: var(--muted);
+  max-width: 45rem;
+}
+
+/* 技術資訊 */
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.project-meta-item {
+  border-radius: 18px;
+  box-shadow: var(--inset);
+  padding: 1rem 1.2rem;
+}
+
+.project-meta-item b {
+  display: block;
+  color: var(--blue-d);
+  margin-bottom: 0.3rem;
+}
+
+.project-meta-item span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* 內容區 */
+.project-section {
+  margin: 1.8rem 0;
+}
+
+.project-section > p {
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* 作品圖片 */
+.project-image {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 22px;
+  box-shadow: var(--inset);
+  text-align: center;
+}
+
+.project-image img {
+  display: block;
+  max-width: 100%;
+  max-height: 500px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 14px;
+  box-shadow: var(--raise-s);
+}
+
+.project-image figcaption {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.8rem;
+}
+
+/* 程式碼區 */
+.project-code {
+  position: relative;
+  border-radius: 20px;
+  box-shadow: var(--inset);
+  padding: 1.3rem;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.project-code summary {
+  color: var(--blue-d);
+  font-weight: 700;
+  padding: 0.5rem 7rem 0.8rem 0;
+}
+
+.project-code pre {
+  background: #263445;
+  color: #e6ebf2;
+  border-radius: 14px;
+  padding: 1.3rem;
+  margin-top: 0.8rem;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  tab-size: 4;
+}
+
+.project-code code {
+  font-family: Consolas, Monaco, monospace;
+}
+
+/* 複製按鈕 */
+.project-copy {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 1;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+}
+
+/* 返回作品集 */
+.project-footer {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+/* 手機版 */
+@media (max-width: 720px) {
+  .project-hero {
+    padding: 1.4rem;
+  }
+
+  .project-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .project-code {
+    padding: 1rem;
+  }
+
+  .project-code pre {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .project-copy {
+    top: 1rem;
+    right: 1rem;
+  }
+}
