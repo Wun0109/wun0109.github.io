@@ -1,167 +1,54 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>攝影機即時擷取 × 截圖儲存</title>
-  <link href="../style.css" rel="stylesheet" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f5f7fa;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .title-bar {
-      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .title-bar h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .content-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
-
-    .section-heading {
-      font-size: 1.25rem;
-      margin-top: 2.5rem;
-      font-weight: bold;
-      color: #3b5773;
-      border-bottom: 2px solid #3b5773;
-      padding-bottom: 0.4rem;
-    }
-
-    .image-box {
-      text-align: center;
-      margin: 1.5rem auto;
-    }
-
-    .image-box img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 0.5rem;
-    }
-
-    figcaption {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.25rem;
-    }
-
-    .info-group {
-      text-align: left;
-      max-width: 800px;
-      margin: 1rem auto;
-      padding-left: 0;
-    }
-
-    .info-group p {
-      margin: 0.2rem 0;
-    }
-
-    .code-container {
-      margin: 2rem 0;
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      position: relative;
-      text-align: left;
-    }
-
-    .code-container details summary {
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      color: #3b5773;
-    }
-
-    .code-container pre {
-      background: #f1f1f1;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #3b5773;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .copy-btn:active {
-      background-color: #2c3e50;
-    }
-
-    .back-btn {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #3b5773;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background-color: #2c3e50;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>攝影機即時擷取 × 截圖儲存 | 潘佳妏 Wun</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../project.js" defer></script>
 </head>
 <body>
-  <div class="title-bar">
-    <h1>攝影機即時擷取 × 截圖儲存</h1>
-  </div>
+  <header>
+    <a class="brand" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> 程式應用</a>
+    <a class="back" href="../index.html">潘佳妏 Wun</a>
+  </header>
 
-  <section class="welcome-section">
-    <div class="info-group">
-      <p>📌 <strong>技術工具：</strong>：Python、OpenCV、時間戳套件、os模組</p>
-      <p>🎯 <strong>應用情境：</strong>：電腦攝影機串接、即時影像擷取、按鍵快速拍照與存檔</p>
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">AI025</p>
+      <h1 class="project-title">攝影機即時擷取 × 截圖儲存</h1>
+      <p class="project-description">擷取本機攝影機畫面即時顯示，並可按鍵截圖儲存。</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><b>技術工具</b><span>Python、OpenCV、時間戳套件、os 模組</span></div>
+        <div class="project-meta-item"><b>應用情境</b><span>電腦攝影機串接、即時影像擷取、按鍵快速拍照與存檔</span></div>
+      </div>
     </div>
 
-    <h2 class="section-heading">功能簡介</h2>
-    <p class="info-group">本程式使用 OpenCV 擷取本機攝影機畫面，並提供即時顯示與按鍵截圖儲存功能。使用者按下數字鍵 <strong>0</strong> 即可將畫面存為圖片，並自動命名為當前時間。</p>
+    <section class="project-section">
+      <h2><i class="ti ti-info-circle" aria-hidden="true"></i>功能簡介</h2>
+      <p>本程式使用 OpenCV 擷取本機攝影機畫面，並提供即時顯示與按鍵截圖儲存功能。使用者按下數字鍵 <strong>0</strong> 即可將畫面存為圖片，並自動命名為當前時間。</p>
+    </section>
 
-    <h2 class="section-heading">成果展示</h2>
-    <div class="image-box">
-      <img src="/images/camera_demo.jpg" alt="即時畫面預覽" />
-      <figcaption>▲ 即時預覽：攝影機畫面會即時顯示在螢幕上</figcaption>
-    </div>
+    <section class="project-section">
+      <h2><i class="ti ti-photo" aria-hidden="true"></i>成果展示</h2>
+      <figure class="project-image">
+        <img src="../images/camera_demo.jpg" alt="即時畫面預覽">
+        <figcaption>即時預覽：攝影機畫面會即時顯示在螢幕上</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/saved_photo_example.png" alt="儲存圖片示意">
+        <figcaption>儲存成果：按下 0 鍵後會立即儲存截圖至本機</figcaption>
+      </figure>
+    </section>
 
-    <div class="image-box">
-      <img src="/images/saved_photo_example.png" alt="儲存圖片示意" />
-      <figcaption>▲ 儲存成果：按下 0 鍵後會立即儲存截圖至本機</figcaption>
-    </div>
-
-    <h2 class="section-heading">程式碼片段</h2>
-    <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details open>
-        <summary>📄 AI025｜攝影機即時擷取</summary>
-      <pre><code id="code-block">import cv2
+    <section class="project-section">
+      <h2><i class="ti ti-code" aria-hidden="true"></i>程式碼片段</h2>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI025｜攝影機即時擷取</summary>
+<pre><code>import cv2
 from time import strftime
 import os
 
@@ -169,7 +56,7 @@ cap = cv2.VideoCapture(0)
 while cap.isOpened():
     success, frame = cap.read()
     cv2.imshow('A11408001_AI025_CV5', frame)
-    keyb = cv2.waitKey(100) & 0xFF
+    keyb = cv2.waitKey(100) &amp; 0xFF
     if keyb == 27:  # ESC 鍵離開
         break
     elif keyb == ord('0'):
@@ -180,21 +67,12 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()</code></pre>
-    </div>
+        </details>
+      </div>
+    </section>
 
-    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
-  </section>
-
-  <script>
-    function copyCode(button) {
-      const codeBlock = button.nextElementSibling.querySelector('code');
-      const text = codeBlock.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        button.innerText = '✅ 已複製';
-        setTimeout(() => { button.innerText = '複製'; }, 1500);
-      });
-    }
-  </script>
-  
+    <div class="project-footer"><a class="btn" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到程式應用</a></div>
+  </main>
+  <footer>© 2026 潘佳妏 Wun</footer>
 </body>
 </html>
