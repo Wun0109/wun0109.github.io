@@ -1,165 +1,51 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> Streamlit 串流展示 × AI 即時辨識</title>
-  <link href="../style.css" rel="stylesheet" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f5f7fa;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .title-bar {
-      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .title-bar h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .content-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
-
-    .section-heading {
-      font-size: 1.25rem;
-      margin-top: 2.5rem;
-      font-weight: bold;
-      color: #3b5773;
-      border-bottom: 2px solid #3b5773;
-      padding-bottom: 0.4rem;
-    }
-
-    .image-box {
-      text-align: center;
-      margin: 1.5rem auto;
-    }
-
-    .image-box img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 0.5rem;
-    }
-
-    figcaption {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.25rem;
-    }
-
-    .info-group {
-      text-align: left;
-      max-width: 800px;
-      margin: 1rem auto;
-      padding-left: 0;
-    }
-
-    .info-group p {
-      margin: 0.2rem 0;
-    }
-
-    .code-container {
-      margin: 2rem 0;
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      position: relative;
-      text-align: left;
-    }
-
-    .code-container details summary {
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      color: #3b5773;
-    }
-
-    .code-container pre {
-      background: #f1f1f1;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #3b5773;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .copy-btn:active {
-      background-color: #2c3e50;
-    }
-
-    .back-btn {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #3b5773;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background-color: #2c3e50;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streamlit 串流展示 × AI 即時辨識 | 潘佳妏 Wun</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../project.js" defer></script>
 </head>
 <body>
-  <div class="title-bar">
-    <h1> Streamlit 串流展示 × AI 即時辨識</h1>
-  </div>
-  <section class="welcome-section">
-    <div class="info-group">
-      <p>📌 <strong>技術工具：</strong>Python、Streamlit、MediaPipe、YouTube 串流、即時影像辨識</p>
-      <p>🎯 <strong>應用情境：</strong>快速部署的電腦視覺網頁應用、遠端直播分析、圖像串流展示</p>
+  <header>
+    <a class="brand" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> 程式應用</a>
+    <a class="back" href="../index.html">潘佳妏 Wun</a>
+  </header>
+
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">AI10X</p>
+      <h1 class="project-title">Streamlit 串流展示 × AI 即時辨識</h1>
+      <p class="project-description">用 Streamlit 做網頁端即時攝影機與 YouTube 串流物件偵測。</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><b>技術工具</b><span>Python、Streamlit、MediaPipe、YouTube 串流、即時影像辨識</span></div>
+        <div class="project-meta-item"><b>應用情境</b><span>快速部署的電腦視覺網頁應用、遠端直播分析、圖像串流展示</span></div>
+      </div>
     </div>
 
-    <h2 class="section-heading">功能簡介</h2>
-      <p class="info-group">
-      <li><strong>AI101_st1｜即時攝影畫面串流介面：</strong>  
-        利用 Streamlit 搭配 OpenCV 實現網頁端即時攝影機畫面顯示，適用於遠端監控、互動展示與原型設計。</li>
-      <li><strong>AI102_st2｜YouTube 串流影片物件偵測：</strong>  
-        整合 yt_dlp 串流擷取與 MediaPipe 模型，在網頁即時辨識直播影片中的物件，可應用於轉播分析與智慧監看。</li>
-    </ul>
+    <section class="project-section">
+      <h2><i class="ti ti-info-circle" aria-hidden="true"></i>功能簡介</h2>
+      <p><strong>AI101_st1｜即時攝影畫面串流介面：</strong>利用 Streamlit 搭配 OpenCV 實現網頁端即時攝影機畫面顯示，適用於遠端監控、互動展示與原型設計。</p>
+      <p><strong>AI102_st2｜YouTube 串流影片物件偵測：</strong>整合 yt_dlp 串流擷取與 MediaPipe 模型，在網頁即時辨識直播影片中的物件，可應用於轉播分析與智慧監看。</p>
+    </section>
 
-    <h2 class="section-heading">📸 Streamlit 互動展示畫面</h2>
-    <div class="image-box">
-      <img src="../images/W5P4.jpg" alt="AI102 Streamlit 串流辨識畫面">
-      <figcaption>▲ AI102 透過 Streamlit 即時顯示 YouTube 串流畫面並進行物件偵測與標記</figcaption>
-    </div>
+    <section class="project-section">
+      <h2><i class="ti ti-photo" aria-hidden="true"></i>成果展示</h2>
+      <figure class="project-image">
+        <img src="../images/W5P4.jpg" alt="AI102 Streamlit 串流辨識畫面">
+        <figcaption>AI102 透過 Streamlit 即時顯示 YouTube 串流畫面並進行物件偵測與標記</figcaption>
+      </figure>
+    </section>
 
-    <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details open>
-        <summary>📄 AI101｜Streamlit 直播畫面顯示</summary>
-        <pre><code>import cv2
+    <section class="project-section">
+      <h2><i class="ti ti-code" aria-hidden="true"></i>程式碼片段</h2>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI101｜Streamlit 直播畫面顯示</summary>
+<pre><code>import cv2
 import streamlit as st
 
 cap = cv2.VideoCapture(0)
@@ -173,14 +59,13 @@ while run:
     FRAME_WINDOW.image(frame, channels='BGR')
 
 cap.release()</code></pre>
-      </details>
-    </div>
-
-    <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details>
-        <summary>📄 AI102｜YouTube 串流 × MediaPipe 物件偵測</summary>
-        <pre><code>import cv2
+        </details>
+      </div>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details>
+          <summary>AI102｜YouTube 串流 × MediaPipe 物件偵測</summary>
+<pre><code>import cv2
 import streamlit as st
 import yt_dlp
 import mediapipe as mp
@@ -217,20 +102,12 @@ while run:
     FRAME_WINDOW.image(image, channels='BGR')
 
 cap.release()</code></pre>
-      </details>
-    </div>
+        </details>
+      </div>
+    </section>
 
-    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
-  </section>
-  <script>
-    function copyCode(button) {
-      const codeBlock = button.nextElementSibling.querySelector('code');
-      const text = codeBlock.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        button.innerText = '✅ 已複製';
-        setTimeout(() => { button.innerText = '複製'; }, 1500);
-      });
-    }
-  </script>
+    <div class="project-footer"><a class="btn" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到程式應用</a></div>
+  </main>
+  <footer>© 2026 潘佳妏 Wun</footer>
 </body>
 </html>

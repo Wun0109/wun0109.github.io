@@ -3,7 +3,7 @@ document.addEventListener('click', function (e) {
   if (!b) return;
   var code = b.parentElement.querySelector('code');
   if (!code || !navigator.clipboard) return;
-  navigator.clipboard.writeText(code.innerText).then(function () {
+  navigator.clipboard.writeText(code.textContent).then(function () {
     var t = b.textContent;
     b.textContent = '已複製';
     setTimeout(function () { b.textContent = t; }, 1500);

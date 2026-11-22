@@ -1,349 +1,223 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gesture 手勢辨識應用</title>
-  <link href="../style.css" rel="stylesheet" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f5f7fa;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .title-bar {
-      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .title-bar h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .content-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
-
-    .section-heading {
-      font-size: 1.25rem;
-      margin-top: 2.5rem;
-      font-weight: bold;
-      color: #3b5773;
-      border-bottom: 2px solid #3b5773;
-      padding-bottom: 0.4rem;
-    }
-
-    .image-box {
-      text-align: center;
-      margin: 1.5rem auto;
-    }
-
-    .image-box img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 0.5rem;
-    }
-
-    figcaption {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.25rem;
-    }
-
-    .info-group {
-      text-align: left;
-      max-width: 800px;
-      margin: 1rem auto;
-      padding-left: 0;
-    }
-
-    .info-group p {
-      margin: 0.2rem 0;
-    }
-
-    .code-container {
-      margin: 2rem 0;
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      position: relative;
-      text-align: left;
-    }
-
-    .code-container details summary {
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      color: #3b5773;
-    }
-
-    .code-container pre {
-      background: #f1f1f1;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #3b5773;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .copy-btn:active {
-      background-color: #2c3e50;
-    }
-
-    .back-btn {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #3b5773;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background-color: #2c3e50;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gesture 手勢辨識應用 | 潘佳妏 Wun</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../project.js" defer></script>
 </head>
 <body>
-  <div class="title-bar">
-    <h1>Gesture 手勢辨識應用</h1>
-  </div>
-  
-  <section class="welcome-section">
-    <div class="info-group">
-      <p>📌<strong>技術工具：</strong>：MediaPipe Hands、角度推論、分類模型、Teachable Machine</p>
-      <p>🎯 <strong>應用情境：</strong>：直播間不雅手勢過濾、互動遊戲控制、物品偵測提示</p>
-    </div>
-    
-    <h2 class="section-heading">功能簡介</h2>
-    <div class="info-group">
-      <p>
-        本專案結合 MediaPipe 與深度學習技術，展示三種手勢辨識方式的實作應用。<br><br>
-        <strong>AI091｜基於角度的手勢推論</strong> 透過手部關鍵點的向量角度計算，定義多組常見手勢並進行推論，為無須訓練模型的邏輯式辨識範例。<br><br><strong>AI092｜MediaPipe 內建手勢辨識</strong> 使用 MediaPipe 提供的手勢模型，即時辨識如勝利、比讚等手勢並顯示信心值。<br><br>
-        <strong>AI093｜Teachable Machine 模型辨識</strong> 則導入 Google Teachable Machine 自行訓練的分類模型，可辨識如「飲料」、「手機」等自定義手勢物件，展現高自由度的辨識應用。<br><br>整體功能可應用於人機互動、手勢控制、互動遊戲與視覺辨識介面開發等多元場景。
-      </p>
-    </div>
+  <header>
+    <a class="brand" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> 程式應用</a>
+    <a class="back" href="../index.html">潘佳妏 Wun</a>
+  </header>
 
-    <h2 class="section-heading">📸 手勢偵測畫面展示</h2>
-    <div class="image-box">
-      <img src="../images/W4P3.jpg" alt="good 手勢辨識" />
-      <figcaption>▲ AI091 利用關節角度推論判斷手勢為「good」</figcaption>
-    </div>
-    <div class="image-box">
-      <img src="../images/W4P4.jpg" alt="no!!! 模糊處理" />
-      <figcaption>▲ AI091 當辨識到不雅手勢時自動模糊處理畫面，避免直播間誤觸</figcaption>
-    </div>
-    <div class="image-box">
-      <img src="../images/W4P5.jpg" alt="AI092 手勢分類" />
-      <figcaption>▲ AI092 使用 MediaPipe 模型即時辨識手勢，顯示分類與信心分數</figcaption>
-    </div>
-    <div class="image-box">
-      <img src="../images/W4P6.jpg" alt="雙手手勢同步分類" />
-      <figcaption>▲ AI092 顯示雙手獨立手勢分類結果，可延伸應用於手勢控制</figcaption>
-    </div>
-    <div class="image-box">
-      <img src="../images/W5P1.jpg" alt="nestea 辨識" />
-      <figcaption>▲ AI093 使用 Teachable Machine 模型辨識 nestea 飲品</figcaption>
-    </div>
-    <div class="image-box">
-      <img src="../images/W5P2.jpg" alt="tissue 辨識" />
-      <figcaption>▲ AI093 偵測 tissue 物件並顯示分類結果</figcaption>
-    </div>
-    <div class="image-box">
-      <img src="../images/W5P3.jpg" alt="phone 辨識" />
-      <figcaption>▲ AI093 成功辨識手機並顯示標籤「phone」</figcaption>
-    </div>
-    
-        </div>
-    <section class="content-section">
-      <h2 class="section-heading">程式碼片段</h2>
-      <div class="code-container">
-        <button class="copy-btn" onclick="copyCode(this)">複製</button>
-        <details open>
-          <summary>📄 AI091｜基於角度的手勢推論</summary>
-          <pre><code id="code1">import cv2
-          import mediapipe as mp
-          import math
-
-          mpd = mp.solutions.drawing_utils
-          mph = mp.solutions.hands
-
-          def vector_2d_angle(v1, v2):
-              try:
-                  angle = math.degrees(math.acos(
-                      (v1[0]*v2[0]+v1[1]*v2[1]) /
-                      (((v1[0]**2+v1[1]**2)**0.5)*((v2[0]**2+v2[1]**2)**0.5))
-                  ))
-              except:
-                  angle = 180
-              return angle
-
-          def hand_angle(hand_):
-              angles = []
-              def a(p1, p2, p3, p4): return vector_2d_angle(
-                  (hand_[p1][0] - hand_[p2][0], hand_[p1][1] - hand_[p2][1]),
-                  (hand_[p3][0] - hand_[p4][0], hand_[p3][1] - hand_[p4][1])
-              )
-              angles.append(a(0, 2, 3, 4))
-              angles.append(a(0, 6, 7, 8))
-              angles.append(a(0, 10, 11, 12))
-              angles.append(a(0, 14, 15, 16))
-              angles.append(a(0, 18, 19, 20))
-              return angles
-
-          def hand_pos(angle_list):
-              f1, f2, f3, f4, f5 = angle_list
-              if f1<50 and f2>=50 and f3>=50 and f4>=50 and f5>=50: return 'good'
-              if f1>=50 and f2>=50 and f3<50 and f4>=50 and f5>=50: return 'no!!!'
-              if f1<50 and f2<50 and f3>=50 and f4>=50 and f5<50: return 'ROCK!'
-              if f1>=50 and all(f>=50 for f in [f2,f3,f4,f5]): return '0'
-              if f1>=50 and all(f>=50 for f in [f2,f3,f4]) and f5<50: return 'pinky'
-              if f1>=50 and f2<50 and all(f>=50 for f in [f3,f4,f5]): return '1'
-              if f1>=50 and all(f<50 for f in [f2,f3]) and f4>=50 and f5>=50: return '2'
-              if f1>=50 and f2>=50 and all(f<50 for f in [f3,f4,f5]): return 'ok'
-              if f1<50 and f2>=50 and all(f<50 for f in [f3,f4,f5]): return 'ok'
-              if f1>=50 and all(f<50 for f in [f2,f3,f4]) and f5>50: return '3'
-              if f1>=50 and all(f<50 for f in [f2,f3,f4,f5]): return '4'
-              if f1<50 and all(f<50 for f in [f2,f3,f4,f5]): return '5'
-              if f1<50 and all(f>=50 for f in [f2,f3,f4]) and f5<50: return '6'
-              if f1<50 and f2<50 and f3>=50 and f4>=50 and f5>=50: return '7'
-              if f1<50 and all(f<50 for f in [f2,f3]) and f4>=50 and f5>=50: return '8'
-              if f1<50 and all(f<50 for f in [f2,f3,f4]) and f5>=50: return '9'
-              return ''
-
-          cap = cv2.VideoCapture(0)
-          hands = mph.Hands(model_complexity=0, max_num_hands=1)
-          w, h = 540, 310
-
-          while cap.isOpened():
-              success, image = cap.read()
-              if not success:
-                  break
-              img = cv2.resize(image, (w, h))
-              results = hands.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-              if results.multi_hand_landmarks:
-                  for handLms in results.multi_hand_landmarks:
-                      points = [(lm.x * w, lm.y * h) for lm in handLms.landmark]
-                      if points:
-                          angles = hand_angle(points)
-                          gesture = hand_pos(angles)
-                          if gesture == 'no!!!':
-                              img = cv2.GaussianBlur(img, (35, 35), 0)
-                          cv2.putText(img, gesture, (30, 120), 1, 5, (0, 0, 255), 10)
-              cv2.imshow('B11108029_gesture1', img)
-              if cv2.waitKey(5) & 0xFF == 27:
-                  break
-          cap.release()
-          cv2.destroyAllWindows()
-</code></pre>
-        </details>
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">AI09X</p>
+      <h1 class="project-title">Gesture 手勢辨識應用</h1>
+      <p class="project-description">用三種方式做手勢辨識：角度推論、MediaPipe 內建模型、Teachable Machine。</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><b>技術工具</b><span>MediaPipe Hands、角度推論、分類模型、Teachable Machine</span></div>
+        <div class="project-meta-item"><b>應用情境</b><span>直播間不雅手勢過濾、互動遊戲控制、物品偵測提示</span></div>
       </div>
-      <div class="code-container">
-        <button class="copy-btn" onclick="copyCode(this)">複製</button>
-        <details>
-          <summary>📄 AI092｜MediaPipe 內建手勢辨識</summary>
-          <pre><code id="code2">import cv2
-          import mediapipe as mp
-          from mediapipe.tasks import python
-          from mediapipe.tasks.python import vision
+    </div>
 
-          base_options = python.BaseOptions(model_asset_path='../models/gesture_recognizer.task')
-          options = vision.GestureRecognizerOptions(base_options=base_options, num_hands=1)
-          recognizer = vision.GestureRecognizer.create_from_options(options)
-
-          cap = cv2.VideoCapture(0)
-          while cap.isOpened():
-              success, image = cap.read()
-              if not success:
-                  break
-              imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-              image_mp = mp.Image(image_format=mp.ImageFormat.SRGB, data=imgrgb)
-              result = recognizer.recognize(image_mp)
-              if result.gestures:
-                  top = result.gestures[0][0]
-                  cv2.putText(image, f'{top.category_name} ({top.score:.2f})', (30, 90),
-                              2, 2, (0, 255, 255), 2)
-              cv2.imshow('B11108029_gesture2', image)
-              if cv2.waitKey(5) & 0xFF == 27:
-                  break
-          cap.release()
-          cv2.destroyAllWindows()
-</code></pre>
-        </details>
-      </div>
-      <div class="code-container">
-        <button class="copy-btn" onclick="copyCode(this)">複製</button>
-        <details>
-          <summary>📄 AI093｜Teachable Machine 模型辨識</summary>
-          <pre><code id="code3">import tensorflow as tf
-          import cv2
-          import numpy as np
-
-          model = tf.keras.models.load_model('../models/keras_model.h5', compile=False)
-          data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-
-          cap = cv2.VideoCapture(0)
-          while cap.isOpened():
-              success, image = cap.read()
-              if not success:
-                  break
-              img = cv2.resize(image, (224, 224))
-              img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-              image = cv2.flip(image, 1)
-              normalized = (img.astype(np.float32) / 127.0) - 1
-              data[0] = normalized
-              prediction = model.predict(data)[0]
-              labels = ['phone', 'nestea', 'tissue']
-              colors = [(255, 0, 255), (255, 0, 0), (0, 0, 255)]
-              for i, (label, threshold) in enumerate(zip(labels, [0.7, 0.2, 0.4])):
-                  if prediction[i] > threshold:
-                      cv2.putText(image, label, (30 + i*100, 120), 1, 3, colors[i], 8)
-              cv2.imshow('B11108029_gesture3', image)
-              if cv2.waitKey(500) & 0xFF == 27:
-                  break
-          cap.release()
-          cv2.destroyAllWindows()
-</code></pre>
-        </details>
-      </div>
-      <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
+    <section class="project-section">
+      <h2><i class="ti ti-info-circle" aria-hidden="true"></i>功能簡介</h2>
+      <p>本專案結合 MediaPipe 與深度學習技術，展示三種手勢辨識方式的實作應用。</p>
+      <p><strong>AI091｜基於角度的手勢推論</strong>：透過手部關鍵點的向量角度計算，定義多組常見手勢並進行推論，為無須訓練模型的邏輯式辨識範例。</p>
+      <p><strong>AI092｜MediaPipe 內建手勢辨識</strong>：使用 MediaPipe 提供的手勢模型，即時辨識如勝利、比讚等手勢並顯示信心值。</p>
+      <p><strong>AI093｜Teachable Machine 模型辨識</strong>：導入 Google Teachable Machine 自行訓練的分類模型，可辨識如「飲料」、「手機」等自定義手勢物件，展現高自由度的辨識應用。</p>
+      <p>整體功能可應用於人機互動、手勢控制、互動遊戲與視覺辨識介面開發等多元場景。</p>
     </section>
 
-                <script>
-                  function copyCode(button) {
-                    const code = button.parentElement.querySelector('code');
-                    navigator.clipboard.writeText(code.textContent).then(() => {
-                      button.textContent = '已複製';
-                      setTimeout(() => button.textContent = '複製', 2000);
-                    });
-                  }
-                </script>
+    <section class="project-section">
+      <h2><i class="ti ti-photo" aria-hidden="true"></i>成果展示</h2>
+      <figure class="project-image">
+        <img src="../images/W4P3.jpg" alt="good 手勢辨識">
+        <figcaption>AI091 利用關節角度推論判斷手勢為「good」</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/W4P4.jpg" alt="no!!! 模糊處理">
+        <figcaption>AI091 當辨識到不雅手勢時自動模糊處理畫面，避免直播間誤觸</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/W4P5.jpg" alt="AI092 手勢分類">
+        <figcaption>AI092 使用 MediaPipe 模型即時辨識手勢，顯示分類與信心分數</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/W4P6.jpg" alt="雙手手勢同步分類">
+        <figcaption>AI092 顯示雙手獨立手勢分類結果，可延伸應用於手勢控制</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/W5P1.jpg" alt="nestea 辨識">
+        <figcaption>AI093 使用 Teachable Machine 模型辨識 nestea 飲品</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/W5P2.jpg" alt="tissue 辨識">
+        <figcaption>AI093 偵測 tissue 物件並顯示分類結果</figcaption>
+      </figure>
+      <figure class="project-image">
+        <img src="../images/W5P3.jpg" alt="phone 辨識">
+        <figcaption>AI093 成功辨識手機並顯示標籤「phone」</figcaption>
+      </figure>
+    </section>
+
+    <section class="project-section">
+      <h2><i class="ti ti-code" aria-hidden="true"></i>程式碼片段</h2>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI091｜基於角度的手勢推論</summary>
+<pre><code>import cv2
+import mediapipe as mp
+import math
+
+mpd = mp.solutions.drawing_utils
+mph = mp.solutions.hands
+
+def vector_2d_angle(v1, v2):
+    try:
+        angle = math.degrees(math.acos(
+            (v1[0]*v2[0]+v1[1]*v2[1]) /
+            (((v1[0]**2+v1[1]**2)**0.5)*((v2[0]**2+v2[1]**2)**0.5))
+        ))
+    except:
+        angle = 180
+    return angle
+
+def hand_angle(hand_):
+    angles = []
+    def a(p1, p2, p3, p4): return vector_2d_angle(
+        (hand_[p1][0] - hand_[p2][0], hand_[p1][1] - hand_[p2][1]),
+        (hand_[p3][0] - hand_[p4][0], hand_[p3][1] - hand_[p4][1])
+    )
+    angles.append(a(0, 2, 3, 4))
+    angles.append(a(0, 6, 7, 8))
+    angles.append(a(0, 10, 11, 12))
+    angles.append(a(0, 14, 15, 16))
+    angles.append(a(0, 18, 19, 20))
+    return angles
+
+def hand_pos(angle_list):
+    f1, f2, f3, f4, f5 = angle_list
+    if f1&lt;50 and f2&gt;=50 and f3&gt;=50 and f4&gt;=50 and f5&gt;=50: return 'good'
+    if f1&gt;=50 and f2&gt;=50 and f3&lt;50 and f4&gt;=50 and f5&gt;=50: return 'no!!!'
+    if f1&lt;50 and f2&lt;50 and f3&gt;=50 and f4&gt;=50 and f5&lt;50: return 'ROCK!'
+    if f1&gt;=50 and all(f&gt;=50 for f in [f2,f3,f4,f5]): return '0'
+    if f1&gt;=50 and all(f&gt;=50 for f in [f2,f3,f4]) and f5&lt;50: return 'pinky'
+    if f1&gt;=50 and f2&lt;50 and all(f&gt;=50 for f in [f3,f4,f5]): return '1'
+    if f1&gt;=50 and all(f&lt;50 for f in [f2,f3]) and f4&gt;=50 and f5&gt;=50: return '2'
+    if f1&gt;=50 and f2&gt;=50 and all(f&lt;50 for f in [f3,f4,f5]): return 'ok'
+    if f1&lt;50 and f2&gt;=50 and all(f&lt;50 for f in [f3,f4,f5]): return 'ok'
+    if f1&gt;=50 and all(f&lt;50 for f in [f2,f3,f4]) and f5&gt;50: return '3'
+    if f1&gt;=50 and all(f&lt;50 for f in [f2,f3,f4,f5]): return '4'
+    if f1&lt;50 and all(f&lt;50 for f in [f2,f3,f4,f5]): return '5'
+    if f1&lt;50 and all(f&gt;=50 for f in [f2,f3,f4]) and f5&lt;50: return '6'
+    if f1&lt;50 and f2&lt;50 and f3&gt;=50 and f4&gt;=50 and f5&gt;=50: return '7'
+    if f1&lt;50 and all(f&lt;50 for f in [f2,f3]) and f4&gt;=50 and f5&gt;=50: return '8'
+    if f1&lt;50 and all(f&lt;50 for f in [f2,f3,f4]) and f5&gt;=50: return '9'
+    return ''
+
+cap = cv2.VideoCapture(0)
+hands = mph.Hands(model_complexity=0, max_num_hands=1)
+w, h = 540, 310
+
+while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+        break
+    img = cv2.resize(image, (w, h))
+    results = hands.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    if results.multi_hand_landmarks:
+        for handLms in results.multi_hand_landmarks:
+            points = [(lm.x * w, lm.y * h) for lm in handLms.landmark]
+            if points:
+                angles = hand_angle(points)
+                gesture = hand_pos(angles)
+                if gesture == 'no!!!':
+                    img = cv2.GaussianBlur(img, (35, 35), 0)
+                cv2.putText(img, gesture, (30, 120), 1, 5, (0, 0, 255), 10)
+    cv2.imshow('B11108029_gesture1', img)
+    if cv2.waitKey(5) &amp; 0xFF == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+        </details>
+      </div>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details>
+          <summary>AI092｜MediaPipe 內建手勢辨識</summary>
+<pre><code>import cv2
+import mediapipe as mp
+from mediapipe.tasks import python
+from mediapipe.tasks.python import vision
+
+base_options = python.BaseOptions(model_asset_path='../models/gesture_recognizer.task')
+options = vision.GestureRecognizerOptions(base_options=base_options, num_hands=1)
+recognizer = vision.GestureRecognizer.create_from_options(options)
+
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+        break
+    imgrgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image_mp = mp.Image(image_format=mp.ImageFormat.SRGB, data=imgrgb)
+    result = recognizer.recognize(image_mp)
+    if result.gestures:
+        top = result.gestures[0][0]
+        cv2.putText(image, f'{top.category_name} ({top.score:.2f})', (30, 90),
+                    2, 2, (0, 255, 255), 2)
+    cv2.imshow('B11108029_gesture2', image)
+    if cv2.waitKey(5) &amp; 0xFF == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+        </details>
+      </div>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details>
+          <summary>AI093｜Teachable Machine 模型辨識</summary>
+<pre><code>import tensorflow as tf
+import cv2
+import numpy as np
+
+model = tf.keras.models.load_model('../models/keras_model.h5', compile=False)
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+        break
+    img = cv2.resize(image, (224, 224))
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    image = cv2.flip(image, 1)
+    normalized = (img.astype(np.float32) / 127.0) - 1
+    data[0] = normalized
+    prediction = model.predict(data)[0]
+    labels = ['phone', 'nestea', 'tissue']
+    colors = [(255, 0, 255), (255, 0, 0), (0, 0, 255)]
+    for i, (label, threshold) in enumerate(zip(labels, [0.7, 0.2, 0.4])):
+        if prediction[i] &gt; threshold:
+            cv2.putText(image, label, (30 + i*100, 120), 1, 3, colors[i], 8)
+    cv2.imshow('B11108029_gesture3', image)
+    if cv2.waitKey(500) &amp; 0xFF == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+        </details>
+      </div>
+    </section>
+
+    <div class="project-footer"><a class="btn" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到程式應用</a></div>
+  </main>
+  <footer>© 2026 潘佳妏 Wun</footer>
 </body>
 </html>
