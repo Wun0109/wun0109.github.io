@@ -1,165 +1,50 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediaPipe 物件偵測 × 多來源應用</title>
-  <link href="../style.css" rel="stylesheet" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f5f7fa;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .title-bar {
-      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .title-bar h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .content-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
-
-    .section-heading {
-      font-size: 1.25rem;
-      margin-top: 2.5rem;
-      font-weight: bold;
-      color: #3b5773;
-      border-bottom: 2px solid #3b5773;
-      padding-bottom: 0.4rem;
-    }
-
-    .image-box {
-      text-align: center;
-      margin: 1.5rem auto;
-    }
-
-    .image-box img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 0.5rem;
-    }
-
-    figcaption {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.25rem;
-    }
-
-    .info-group {
-      text-align: left;
-      max-width: 800px;
-      margin: 1rem auto;
-      padding-left: 0;
-    }
-
-    .info-group p {
-      margin: 0.2rem 0;
-    }
-
-    .code-container {
-      margin: 2rem 0;
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      position: relative;
-      text-align: left;
-    }
-
-    .code-container details summary {
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      color: #3b5773;
-    }
-
-    .code-container pre {
-      background: #f1f1f1;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #3b5773;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .copy-btn:active {
-      background-color: #2c3e50;
-    }
-
-    .back-btn {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #3b5773;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background-color: #2c3e50;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediaPipe 物件偵測 × 多來源應用 | 潘佳妏 Wun</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../project.js" defer></script>
 </head>
 <body>
-  <div class="title-bar">
-    <h1>MediaPipe 物件偵測 × 多來源應用</h1>
-  </div>
+  <header>
+    <a class="brand" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> 程式應用</a>
+    <a class="back" href="../index.html">潘佳妏 Wun</a>
+  </header>
 
-  <section class="welcome-section">
-    <div class="info-group">
-      <p>📌  <strong>技術工具：</strong>：Python、MediaPipe Tasks、OpenCV、TFLite EfficientDet 模型</p>
-      <p>🎯 <strong>應用情境：</strong>：圖片辨識、即時攝影機偵測、YouTube 串流辨識</p>
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">AI03X</p>
+      <h1 class="project-title">MediaPipe 物件偵測 × 多來源應用</h1>
+      <p class="project-description">整合 MediaPipe 物件偵測，處理圖片、即時攝影機與 YouTube 串流三種來源。</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><b>技術工具</b><span>Python、MediaPipe Tasks、OpenCV、TFLite EfficientDet 模型</span></div>
+        <div class="project-meta-item"><b>應用情境</b><span>圖片辨識、即時攝影機偵測、YouTube 串流辨識</span></div>
+      </div>
     </div>
 
-    <h2 class="section-heading">功能簡介</h2>
-    <p class="info-group">
-      本作品整合 MediaPipe 的物件偵測模組，使用 EfficientDet Lite 模型，實作於三種影像來源：
-      <strong>靜態圖片</strong>、<strong>即時攝影機</strong>、<strong>YouTube 串流</strong>。支援畫框、標示類別與信心值，可應用於監控、教學與視覺整合展示等場景。
-    </p>
+    <section class="project-section">
+      <h2><i class="ti ti-info-circle" aria-hidden="true"></i>功能簡介</h2>
+      <p>本作品整合 MediaPipe 的物件偵測模組，使用 EfficientDet Lite 模型，實作於三種影像來源：<strong>靜態圖片</strong>、<strong>即時攝影機</strong>、<strong>YouTube 串流</strong>。支援畫框、標示類別與信心值，可應用於監控、教學與視覺整合展示等場景。</p>
+    </section>
 
-    <div class="image-box">
-      <img src="/images/mediapipe_detection_demo.JPG""MediaPipe 偵測示意圖" />
-      <figcaption>▲ 展示畫面：成功辨識人、火車等目標，應用於攝影機、YouTube 串流等不同來源</figcaption>
-    </div>
+    <section class="project-section">
+      <h2><i class="ti ti-photo" aria-hidden="true"></i>成果展示</h2>
+      <figure class="project-image">
+        <img src="../images/mediapipe_detection_demo.JPG" alt="MediaPipe 偵測示意圖">
+        <figcaption>展示畫面：成功辨識人、火車等目標，應用於攝影機、YouTube 串流等不同來源</figcaption>
+      </figure>
+    </section>
 
-    <h2 class="section-heading">程式碼片段</h2>
-
-    <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details open>
-        <summary>📄 AI031｜圖片辨識</summary>
-      <pre><code id="code-block1">import cv2
+    <section class="project-section">
+      <h2><i class="ti ti-code" aria-hidden="true"></i>程式碼片段</h2>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI031｜圖片辨識</summary>
+<pre><code>import cv2
 import mediapipe as mp
 base_options = mp.tasks.BaseOptions('efficientdet_lite0.tflite')
 options = mp.tasks.vision.ObjectDetectorOptions(base_options, score_threshold=0.5)
@@ -169,14 +54,13 @@ cap = cv2.VideoCapture('pic/cat_and_dog.jpg')
 success, image = cap.read()
 image_mp = mp.Image(mp.ImageFormat.SRGB, image)
 detection_result = detector.detect(image_mp)</code></pre>
-    </div>
-
-    <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details open>
-        <summary>📄 AI032｜即時偵測</summary>
-        
-      <pre><code id="code-block2">import cv2
+        </details>
+      </div>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI032｜即時偵測</summary>
+<pre><code>import cv2
 import mediapipe as mp
 base_options = mp.tasks.BaseOptions('efficientdet_lite0.tflite')
 options = mp.tasks.vision.ObjectDetectorOptions(base_options, score_threshold=0.5)
@@ -198,17 +82,17 @@ while cap.isOpened():
         cv2.putText(image, result_text, (10 + bbox.origin_x, 20 + bbox.origin_y),
                 1, 1, (0, 0, 255), 1)
     cv2.imshow('Live Detection', image)
-    if cv2.waitKey(1) & 0xFF == 27:
+    if cv2.waitKey(1) &amp; 0xFF == 27:
        break
 cap.release()
 cv2.destroyAllWindows()</code></pre>
-    </div>
-
-        <div class="code-container">
-      <button class="copy-btn" onclick="copyCode(this)">複製</button>
-      <details open>
-        <summary>📄 AI033｜YouTube 串流偵測</summary>
-              <pre><code id="code-block3">import cv2
+        </details>
+      </div>
+      <div class="project-code">
+        <button class="btn project-copy" type="button" data-copy>複製</button>
+        <details open>
+          <summary>AI033｜YouTube 串流偵測</summary>
+<pre><code>import cv2
 import yt_dlp
 import mediapipe as mp
 base_options = mp.tasks.BaseOptions('efficientdet_lite0.tflite')
@@ -237,20 +121,12 @@ while cap.isOpened():
         cv2.putText(image, result_text, (10 + bbox.origin_x, 20 + bbox.origin_y),
             1, 1, (255, 255, 255), 1)
     cv2.imshow('YouTube Detection', image)</code></pre>
-    </div>
+        </details>
+      </div>
+    </section>
 
-    <a href="../index.html#code-projects" class="back-btn">← 回到作品集</a>
-  </section>
-
-    <script>
-      function copyCode(button) {
-        const codeBlock = button.nextElementSibling.querySelector('code');
-        const text = codeBlock.innerText;
-        navigator.clipboard.writeText(text).then(() => {
-          button.innerText = '✅ 已複製';
-          setTimeout(() => { button.innerText = '複製'; }, 1500);
-        });
-      }
-    </script>
+    <div class="project-footer"><a class="btn" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到程式應用</a></div>
+  </main>
+  <footer>© 2026 潘佳妏 Wun</footer>
 </body>
 </html>
