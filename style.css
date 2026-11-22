@@ -227,3 +227,19 @@ footer{text-align:center;color:var(--muted);font-size:.92rem;padding:1rem}
     right: 1rem;
   }
 }
+
+/* 程式碼區裡的 details 不要再套首頁的卡片樣式 */
+.project-code details,
+.project-code details[open] {
+  box-shadow: none;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* 複製按鈕對齊程式碼區的內距 */
+.project-copy {
+  top: 1rem;
+  right: 1.3rem;
+}
