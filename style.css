@@ -243,3 +243,8 @@ footer{text-align:center;color:var(--muted);font-size:.92rem;padding:1rem}
   top: 1rem;
   right: 1.3rem;
 }
+
+/* AI 教學模擬器 */
+.sim-image { display: block; width: 100%; border-radius: 18px; box-shadow: var(--raise-s); margin: 1.2rem 0; }
+.sim-actions { text-align: center; }
+.sim-feedback { border-radius: 18px; box-shadow: var(--inset); padding: 1rem 1.3rem; margin-top: 1.5rem; font-weight: 500; }
