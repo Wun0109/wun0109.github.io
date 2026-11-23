@@ -244,6 +244,9 @@ footer{text-align:center;color:var(--muted);font-size:.92rem;padding:1rem}
   right: 1.3rem;
 }
 
+/* 所有圖片不超出容器 */
+img { max-width: 100%; height: auto; }
+
 /* AI 教學模擬器 */
 .sim-image { display: block; width: 100%; border-radius: 18px; box-shadow: var(--raise-s); margin: 1.2rem 0; }
 .sim-actions { text-align: center; }
