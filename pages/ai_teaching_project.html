@@ -1,352 +1,138 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 教學模擬器專案介紹</title>
-  <link href="../style.css" rel="stylesheet" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f5f7fa;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .title-bar {
-      background: linear-gradient(90deg, #3b5773 0%, #4e6c8f 100%);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .title-bar h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .content-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-    }
-
-    .section-heading {
-      font-size: 1.5rem;
-      margin-top: 2.5rem;
-      font-weight: bold;
-      color: #3b5773;
-      border-bottom: 2px solid #3b5773;
-      padding-bottom: 0.4rem;
-    }
-
-    .info-group {
-      text-align: left;
-      max-width: 800px;
-      margin: 1rem auto;
-      padding-left: 0;
-    }
-
-    .info-group p {
-      margin: 0.4rem 0;
-    }
-
-    .photo-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .photo-row img {
-      width: 100%;
-      max-width: 420px;
-      border-radius: 10px;
-      box-shadow: 0 0 6px rgba(0,0,0,0.1);
-    }
-
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 1rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .back-btn {
-      margin-top: 2rem;
-      display: inline-block;
-      background-color: #3b5773;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-btn:hover {
-      background-color: #2c3e50;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #777;
-      margin-top: 3rem;
-      padding-bottom: 2rem;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -0.5rem;
-      margin-right: -0.5rem;
-    }
-
-    .col-md-4 {
-      flex: 0 0 auto;
-      width: 100%;
-      max-width: 100%;
-      padding: 0.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .col-md-4 {
-        width: 33.3333%;
-        max-width: 33.3333%;
-      }
-    }
-
-    .card {
-      border: 2px solid #d3dff3;
-      border-left: 6px solid #3b5773;
-      border-radius: 10px;
-      background-color: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
-
-      /* 等高排版核心 */
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card-title {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-text {
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    .btn-outline-primary {
-      border: 1px solid #3b5773;
-      color: #3b5773;
-      background-color: transparent;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-outline-primary:hover {
-      background-color: #3b5773;
-      color: white;
-    }
-
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 教學模擬器 | 潘佳妏 Wun</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
-  <div class="title-bar">
-    <h1>AI 教學模擬器專案介紹</h1>
-  </div>
+  <header>
+    <a class="brand" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> 程式應用</a>
+    <a class="back" href="../index.html">潘佳妏 Wun</a>
+  </header>
 
-  <section class="welcome-section">
-    <h2 class="section-heading">🧠 專案動機與教學現場</h2>
-    <div class="info-group" style="max-width: 720px; margin: 0 auto; text-align: center;">
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">獨立專題｜概念原型</p>
+      <h1 class="project-title">AI 教學模擬器</h1>
+      <p class="project-description">從泰北志工教學經驗出發的概念原型：目前可以體驗語音輸入、學生表情切換與基本教學建議，其餘功能是規劃中的方向。</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><b>技術工具</b><span>瀏覽器語音辨識 API、JavaScript</span></div>
+        <div class="project-meta-item"><b>應用情境</b><span>志工教師出發前的教學情境模擬練習</span></div>
+      </div>
+    </div>
+
+    <section class="project-section">
+      <h2><i class="ti ti-bulb" aria-hidden="true"></i>專案動機與教學現場</h2>
       <p>本專案靈感來自我曾於泰北國小擔任志工教師的經驗。</p>
       <p>當時觀察到學生常因語言隔閡、害羞，或教師準備不足而缺乏有效互動。</p>
       <p>為了幫助未受訓的志工教師在出發前就能模擬練習，我設計這套整合 AI 的教學模擬器。</p>
-    </div>
+      <p>我也是第一次擔任老師，沒有教學經驗，所以想用情境假設的方式，看看自己面對學生反應時的處理能力。</p>
+      <figure class="project-image">
+        <img src="../images/my_teaching_photo1.PNG" alt="教學照片1">
+      </figure>
+      <figure class="project-image">
+        <img src="../images/my_teaching_photo2.PNG" alt="教學照片2">
+      </figure>
+    </section>
 
-
-    <div class="photo-row" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
-      <img src="../images/my_teaching_photo1.PNG" alt="教學照片1" style="max-width: 45%; border-radius: 10px; box-shadow: 0 0 6px rgba(0,0,0,0.1);" />
-      <img src="../images/my_teaching_photo2.PNG" alt="教學照片2" style="max-width: 45%; border-radius: 10px; box-shadow: 0 0 6px rgba(0,0,0,0.1);" />
-    </div>
-
-
-    <h2 class="section-heading">🧩 功能模組介紹</h2>
-    <div class="row g-3 mt-2 mb-4">
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body">
-            <h6 class="card-title">🗣️ 語音輸入模組</h6>
-            <p class="card-text small">結合瀏覽器語音辨識 API，自然捕捉教師語句進入互動流程。</p>
-          </div>
-        </div>
+    <section class="project-section">
+      <h2><i class="ti ti-puzzle" aria-hidden="true"></i>功能模組介紹</h2>
+      <div class="project-grid">
+        <div class="project-card"><h3><i class="ti ti-microphone" aria-hidden="true"></i> 語音輸入模組</h3><p>結合瀏覽器語音辨識 API，自然捕捉教師語句進入互動流程。</p></div>
+        <div class="project-card"><h3><i class="ti ti-mood-smile" aria-hidden="true"></i> 學生反應模擬</h3><p>透過圖片切換模擬學生理解、困惑與驚訝的整體表情反應。</p></div>
+        <div class="project-card"><h3><i class="ti ti-message-circle" aria-hidden="true"></i> 教學建議與語氣分析</h3><p>根據語句特徵與語氣關鍵詞提供基本教學建議，未來可整合 LLM。</p></div>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body">
-            <h6 class="card-title">🎭 學生反應模擬</h6>
-            <p class="card-text small">透過圖片切換模擬學生理解、困惑與驚訝的整體表情反應。</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body">
-            <h6 class="card-title">📋 教學建議與語氣分析</h6>
-            <p class="card-text small">根據語句特徵與語氣關鍵詞提供基本教學建議，未來可整合 LLM。</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
 
+    <section class="project-section">
+      <h2><i class="ti ti-plant" aria-hidden="true"></i>期待發展方向</h2>
+      <p>以下功能目前尚未實作，預計作為後續擴充方向，讓模擬器更具 AI 智能與實用價值。</p>
+      <p><strong>表情自動分析（MediaPipe）</strong>：透過整合 MediaPipe 臉部特徵點偵測模組，將可即時讀取學生表情狀態，替代圖片模擬，提升互動真實性與反饋即時性。</p>
+      <p><strong>LLM 智能教學語句回應</strong>：預計導入大型語言模型（如 ChatGPT 或 Gemma），提供語意理解與語氣建議回饋，強化語言表達與教學策略精煉。</p>
+      <p><strong>語調語速統計與教師成長分析</strong>：記錄每次語音輸入的長度、語速與鼓勵型用詞比例，建立教師成長曲線，支援自我教學反思與成效評估。</p>
+    </section>
 
-    <h2 class="section-heading">🌱 期待發展方向</h2>
-    <div class="text-center mb-4">
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 1rem;">
-        <span style="background: #f1f4f7; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
-          🧠 MediaPipe 表情
-        </span>
-        <span style="background: #f1f4f7; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
-          💬 教學語氣建議
-        </span>
-        <span style="background: #f1f4f7; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
-          📈 教師語速分析
-        </span>
-      </div><br>
-      <p class="mt-3 small text-muted">
-        上述功能目前尚未實作，預計作為後續擴充方向，讓模擬器更具 AI 智能與實用價值。
-      </p>
-      
-      <div class="info-group" style="margin-top: 1.2rem;">
-        <p>
-          🧠 <strong>表情自動分析（MediaPipe）</strong>：透過整合 MediaPipe 臉部特徵點偵測模組，將可即時讀取學生表情狀態，替代圖片模擬，提升互動真實性與反饋即時性。
-        </p><br>
-        <p>
-          💬 <strong>LLM 智能教學語句回應</strong>：預計導入大型語言模型（如 ChatGPT 或 Gemma），提供語意理解與語氣建議回饋，強化語言表達與教學策略精煉。
-        </p><br>
-        <p>
-          📈 <strong>語調語速統計與教師成長分析</strong>：記錄每次語音輸入的長度、語速與鼓勵型用詞比例，建立教師成長曲線，支援自我教學反思與成效評估。
-        </p>
-      </div>
-    </div>
-
-
-
-    <h2 class="section-heading">🎬 模擬器展示區</h2>
-
-    <div class="info-group">
+    <section class="project-section">
+      <h2><i class="ti ti-player-play" aria-hidden="true"></i>模擬器展示區</h2>
       <p>本模擬器為「語音輸入 × 學生反應模擬 × 教學建議分析」的整合展示版本，透過說一句話，即可體驗整體互動流程。</p>
-    </div>
+      <p><strong>使用說明</strong></p>
+      <p>Step 1：點下方開始語音按鈕，對畫面說出一段教學語句。</p>
+      <p>Step 2：觀察畫面中學生模擬圖像隨之切換（表情變化）。</p>
+      <p>Step 3：下方即時顯示 AI 回饋語氣建議與語句分析。</p>
+      <img id="classroom" class="sim-image" src="../images/classroom_neutral.jpg" alt="模擬教室畫面">
+      <div class="sim-actions"><button class="btn" type="button" id="start-speech"><i class="ti ti-microphone" aria-hidden="true"></i>開始語音輸入</button></div>
+      <div id="feedback" class="sim-feedback" aria-live="polite">請對畫面說一句教學語句，系統將自動模擬學生反應並給予語氣建議。</div>
+    </section>
 
-    <div class="info-group" style="background: #f0f4f8; border-left: 4px solid #3b5773; padding: 1rem 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-      <p style="margin-bottom: 0.5rem;"><strong>🔧 使用說明：</strong></p>
-      <ul style="padding-left: 1.2rem; margin-bottom: 0;">
-        <li>Step 1：點下方開始語音按鈕，對畫面說出一段教學語句</li>
-        <li>Step 2：觀察畫面中學生模擬圖像隨之切換（表情變化）</li>
-        <li>Step 3：下方即時顯示 AI 回饋語氣建議與語句分析</li>
-      </ul>
-    </div>
+    <p class="back">學生模擬表情圖片素材取自 <a href="https://www.freepik.com/" target="_blank" rel="noopener">Freepik</a>，僅供教學示意使用。</p>
+    <div class="project-footer"><a class="btn" href="code.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到程式應用</a></div>
+  </main>
+  <footer>© 2026 潘佳妏 Wun</footer>
 
-    <div class="container" style="background:#fff; padding:1rem; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.05);">
-      <img id="classroom" style="width:100%; border-radius:10px; margin-bottom:1rem; box-shadow: 0 0 8px rgba(0,0,0,0.08);" src="/images/classroom_neutral.jpg" alt="模擬教室畫面">
+  <script>
+    var classroomImgs = [
+      { img: "../images/smile.jpg", label: "學生開心微笑" },
+      { img: "../images/confused.jpg", label: "學生疑惑皺眉" },
+      { img: "../images/surprised.jpg", label: "學生驚訝張嘴" },
+      { img: "../images/distracted.jpg", label: "學生分心游移" },
+      { img: "../images/neutral.jpg", label: "學生表情平靜" }
+    ];
+    classroomImgs.forEach(function (c) { var i = new Image(); i.src = c.img; });
 
-      <div style="text-align:center;">
-        <button onclick="simulateSpeech()" style="background-color:#3b5773; color:white; padding:0.8rem 1.6rem; border:none; font-size:1rem; border-radius:6px; cursor:pointer;">開始語音輸入</button>
-      </div>
-
-      <div id="feedback" style="background-color: #d4efdf; padding: 1rem; border-radius: 8px; margin-top: 1.5rem; color: #145a32; font-weight: bold;">
-        💬 請對畫面說一句教學語句，系統將自動模擬學生反應並給予語氣建議。
-      </div>
-    </div>
-
-    <script>
-      // 🔁 預先載入學生反應圖片
-      const preloadImages = [
-        "../images/smile.jpg",
-        "../images/confused.jpg",
-        "../images/surprised.jpg",
-        "../images/distracted.jpg",
-        "../images/neutral.jpg"
-      ];
-      preloadImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
+    function esc(s) {
+      return s.replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
       });
+    }
 
-      const classroomImgs = [
-        { img: "../images/smile.jpg", label: "學生開心微笑" },
-        { img: "../images/confused.jpg", label: "學生疑惑皺眉" },
-        { img: "../images/surprised.jpg", label: "學生驚訝張嘴" },
-        { img: "../images/distracted.jpg", label: "學生分心游移" },
-        { img: "../images/neutral.jpg", label: "學生表情平靜" }
-      ];
-
-      function simulateSpeech() {
-        const feedbackBox = document.getElementById("feedback");
-        feedbackBox.innerText = "🎤 系統聆聽中，請說話...";
-
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = "zh-TW";
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
-        recognition.start();
-
-        recognition.onresult = (event) => {
-          const transcript = event.results[0][0].transcript;
-          let selected = { img: "../images/neutral.jpg", label: "學生表情平靜" };
-
-          // 🔍 根據語氣決定圖片
-          if (transcript.includes("很好") || transcript.includes("你可以") || transcript.includes("沒關係")) {
-            selected = { img: "../images/smile.jpg", label: "學生開心微笑" };
-          } else if (transcript.endsWith("嗎") || transcript.includes("是不是") || transcript.includes("知道")) {
-            selected = { img: "../images/confused.jpg", label: "學生疑惑皺眉" };
-          } else if (transcript.includes("注意") || transcript.includes("記住") || transcript.includes("哇")) {
-            selected = { img: "../images/surprised.jpg", label: "學生驚訝張嘴" };
-          } else if (transcript.length > 30) {
-            selected = { img: "../images/distracted.jpg", label: "學生分心游移" };
-          }
-          document.getElementById("classroom").src = selected.img;
-
-          feedbackBox.innerHTML = `
-            ✅ 你說的是：「<strong>${transcript}</strong>」<br>
-            🎭 模擬學生反應：${selected.label}<br>
-          `;
-          if (transcript.length > 25) {
-            feedbackBox.innerHTML += "📌 建議：語句稍長，可嘗試分段講解或加入肢體提示。";
-          } else if (transcript.includes("沒關係") || transcript.includes("你可以")) {
-            feedbackBox.innerHTML += "👍 語氣鼓勵，能有效提升學生參與感！";
-          } else {
-            feedbackBox.innerHTML += "📋 建議加入引導提問，提升學生理解與互動。";
-          }
-        };
-
-        recognition.onerror = (event) => {
-          feedbackBox.innerText = "❌ 語音辨識失敗，請使用 Chrome 並允許使用麥克風。";
-        };
+    function simulateSpeech() {
+      var feedbackBox = document.getElementById("feedback");
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+        feedbackBox.textContent = "這個瀏覽器不支援語音辨識，請使用 Chrome。";
+        return;
       }
-    </script>
+      feedbackBox.textContent = "系統聆聽中，請說話...";
 
-    <a href="../index.html#projects" class="back-btn">← 回到作品集首頁</a>
-  </section>
-  <div class="info-group" style="margin-top: 2rem; font-size: 0.9rem; color: #555; text-align: center;">
-    <p>👦 學生模擬表情圖片素材取自 <a href="https://www.freepik.com/" target="_blank" style="color: #3b5773; text-decoration: underline;">Freepik</a>，僅供教學示意使用。</p>
-  </div>
+      var recognition = new SR();
+      recognition.lang = "zh-TW";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.start();
 
+      recognition.onresult = function (event) {
+        var transcript = event.results[0][0].transcript;
+        var selected = classroomImgs[4];
+
+        if (transcript.includes("很好") || transcript.includes("你可以") || transcript.includes("沒關係")) {
+          selected = classroomImgs[0];
+        } else if (transcript.endsWith("嗎") || transcript.includes("是不是") || transcript.includes("知道")) {
+          selected = classroomImgs[1];
+        } else if (transcript.includes("注意") || transcript.includes("記住") || transcript.includes("哇")) {
+          selected = classroomImgs[2];
+        } else if (transcript.length > 30) {
+          selected = classroomImgs[3];
+        }
+        document.getElementById("classroom").src = selected.img;
+
+        feedbackBox.innerHTML = "你說的是：「<strong>" + esc(transcript) + "</strong>」<br>模擬學生反應：" + selected.label + "<br>";
+        if (transcript.length > 25) {
+          feedbackBox.innerHTML += "建議：語句稍長，可嘗試分段講解或加入肢體提示。";
+        } else if (transcript.includes("沒關係") || transcript.includes("你可以")) {
+          feedbackBox.innerHTML += "語氣鼓勵，能有效提升學生參與感！";
+        } else {
+          feedbackBox.innerHTML += "建議加入引導提問，提升學生理解與互動。";
+        }
+      };
+
+      recognition.onerror = function () {
+        feedbackBox.textContent = "語音辨識失敗，請使用 Chrome 並允許使用麥克風。";
+      };
+    }
+    document.getElementById("start-speech").addEventListener("click", simulateSpeech);
+  </script>
 </body>
 </html>
