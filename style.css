@@ -251,3 +251,13 @@ img { max-width: 100%; height: auto; }
 .sim-image { display: block; width: 100%; border-radius: 18px; box-shadow: var(--raise-s); margin: 1.2rem 0; }
 .sim-actions { text-align: center; }
 .sim-feedback { border-radius: 18px; box-shadow: var(--inset); padding: 1rem 1.3rem; margin-top: 1.5rem; font-weight: 500; }
+
+/* 甘特圖 */
+.gantt { list-style: none; margin: 0; padding: 0; }
+.gantt li { margin-bottom: 1rem; }
+.gantt-label { display: block; font-size: .93rem; margin-bottom: .3rem; }
+.gantt-label small { color: var(--muted); }
+.gantt-track { position: relative; display: block; height: 16px; border-radius: 999px; box-shadow: var(--inset); }
+.gantt-bar { position: absolute; top: 2px; bottom: 2px; border-radius: 999px; background: var(--blue); }
+.gantt-axis { position: relative; height: 1.4rem; margin-bottom: .8rem; font-size: .8rem; color: var(--muted); }
+.gantt-axis span { position: absolute; }
