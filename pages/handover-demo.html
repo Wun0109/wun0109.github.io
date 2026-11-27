@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>交接工具示範 | Wun Pan</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.17.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-note{border-radius:16px;box-shadow:var(--inset);padding:1rem 1.3rem;margin-bottom:1.2rem;font-weight:500}
+    .demo-alert{border-radius:16px;box-shadow:var(--inset);padding:.8rem 1.2rem;margin-bottom:1.2rem}
+    .demo-controls{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-bottom:1.2rem}
+    .demo-controls label{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+    .demo-controls input[type=search],.demo-controls select{font:inherit;color:inherit;background:var(--bg);border:0;border-radius:999px;box-shadow:var(--inset);padding:.45rem 1rem;min-width:0}
+    .demo-list{list-style:none;margin:0;padding:0}
+    .demo-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.2rem;border-radius:18px;box-shadow:var(--inset);padding:1rem 1.3rem;margin-bottom:1rem}
+    .demo-row>div{flex:1 1 18rem;min-width:0}
+    .demo-row b{display:block}
+    .demo-row small{color:var(--muted)}
+    .demo-badge{display:inline-flex;align-items:center;gap:.3rem;border-radius:999px;box-shadow:var(--raise-s);padding:0 .8rem;font-size:.85rem;margin-right:.4rem}
+    .demo-overdue{border-left:6px solid #c0392b}
+    .demo-overdue .demo-badge.due{color:#c0392b;font-weight:700}
+    .demo-done{opacity:.6}
+    .demo-empty{color:var(--muted);padding:1rem 0}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="../index.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> Wun Pan</a>
+    <span class="back">交接工具示範</span>
+  </header>
+  <main class="project-main">
+    <div class="panel project-hero">
+      <p class="project-eyebrow">概念示範｜非原系統，資料皆為虛構</p>
+      <h1 class="project-title">多人接力追蹤的交接工具</h1>
+      <p class="project-description">這是我另外做的通用版概念示範，用來說明「到期提醒、優先顯示待辦、查詢」這幾個設計想法。場景是虛構的小型團隊，頁面上所有案件、成員與日期都是示範用資料。</p>
+    </div>
+
+    <section class="project-section">
+      <h2><i class="ti ti-checklist" aria-hidden="true"></i>試試看</h2>
+      <p class="demo-note">這是靜態頁面，操作只存在這次瀏覽中，重新整理會還原。不是原系統，也沒有連到任何真實資料。</p>
+      <div class="demo-alert" id="alert" role="status" aria-live="polite"></div>
+      <div class="demo-controls">
+        <label for="q"><i class="ti ti-search" aria-hidden="true"></i>查詢<input id="q" type="search" placeholder="輸入案件、成員或下一步"></label>
+        <label for="f">狀態<select id="f"><option value="all">全部</option><option value="overdue">已逾期</option><option value="today">今天到期</option><option value="open">進行中</option><option value="done">已完成</option></select></label>
+        <label for="p"><input id="p" type="checkbox" checked>優先顯示待辦</label>
+      </div>
+      <ul class="demo-list" id="list"></ul>
+    </section>
+
+    <section class="project-section">
+      <h2><i class="ti ti-bulb" aria-hidden="true"></i>這個示範想說明的設計想法</h2>
+      <p><strong>到期提醒：</strong>逾期的項目會標紅並寫出逾期天數，不只靠顏色，頂端也會彙總件數，提醒去追蹤。</p>
+      <p><strong>優先顯示待辦：</strong>逾期與最快到期的排在前面，已完成的放到最後，打開就知道先做什麼。</p>
+      <p><strong>查詢：</strong>用關鍵字或狀態篩選，不需要逐筆翻找。</p>
+      <p><strong>欄位刻意保持通用：</strong>案件、負責人、下一步、到期日、狀態，換成其他多人接力的工作也能套用。</p>
+    </section>
+    <div class="project-footer"><a class="btn" href="../index.html"><i class="ti ti-arrow-left" aria-hidden="true"></i>回到首頁</a></div>
+  </main>
+  <footer>© 2026 Wun Pan</footer>
+<script>
+(function(){
+  var DAY=86400000;
+  function startOfToday(){var d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();}
+  var today=startOfToday();
+  var items=[
+    {id:"D-101",title:"新夥伴文件整理",owner:"成員 甲",next:"補齊交接清單後轉給成員 乙",off:-3,done:false},
+    {id:"D-102",title:"月度數據核對",owner:"成員 乙",next:"確認兩份報表差異",off:0,done:false},
+    {id:"D-103",title:"供應商報價比較",owner:"成員 丙",next:"整理三家報價並標出差異",off:2,done:false},
+    {id:"D-104",title:"會議紀錄與待辦整理",owner:"成員 甲",next:"寄出紀錄並追蹤各項待辦",off:-1,done:false},
+    {id:"D-105",title:"活動場地確認",owner:"成員 乙",next:"等待對方回覆後安排現勘",off:5,done:false},
+    {id:"D-106",title:"問卷結果彙整",owner:"成員 丙",next:"已完成，歸檔",off:-6,done:true},
+    {id:"D-107",title:"內部說明簡報修訂",owner:"成員 甲",next:"依回饋調整版面並再次確認",off:7,done:false}
+  ];
+  function fmt(t){var d=new Date(t);return d.getFullYear()+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+("0"+d.getDate()).slice(-2);}
+  function state(it){if(it.done)return "done";var due=today+it.off*DAY;if(due<today)return "overdue";if(due===today)return "today";return "open";}
+  var list=document.getElementById("list"),q=document.getElementById("q"),f=document.getElementById("f"),p=document.getElementById("p"),alertBox=document.getElementById("alert");
+  function badge(text,cls,icon){var s=document.createElement("span");s.className="demo-badge"+(cls?" "+cls:"");var i=document.createElement("i");i.className="ti "+icon;i.setAttribute("aria-hidden","true");s.appendChild(i);s.appendChild(document.createTextNode(text));return s;}
+  function render(){
+    var kw=q.value.trim().toLowerCase(),flt=f.value;
+    var od=0,td=0;
+    items.forEach(function(it){var s=state(it);if(s==="overdue")od++;if(s==="today")td++;});
+    alertBox.textContent=(od||td)?("提醒：目前有 "+od+" 件已逾期、"+td+" 件今天到期。"):"目前沒有逾期或今天到期的項目。";
+    var rows=items.filter(function(it){
+      var s=state(it);
+      if(flt==="overdue"&&s!=="overdue")return false;
+      if(flt==="today"&&s!=="today")return false;
+      if(flt==="open"&&(s==="done"))return false;
+      if(flt==="done"&&s!=="done")return false;
+      if(kw){var hay=(it.id+it.title+it.owner+it.next).toLowerCase();if(hay.indexOf(kw)<0)return false;}
+      return true;
+    });
+    if(p.checked){rows.sort(function(a,b){var da=a.done?1:0,db=b.done?1:0;if(da!==db)return da-db;return a.off-b.off;});}
+    else{rows.sort(function(a,b){return a.id<b.id?-1:1;});}
+    list.textContent="";
+    if(!rows.length){var e=document.createElement("li");e.className="demo-empty";e.textContent="沒有符合的項目。";list.appendChild(e);return;}
+    rows.forEach(function(it){
+      var s=state(it),li=document.createElement("li");
+      li.className="demo-row"+(s==="overdue"?" demo-overdue":"")+(s==="done"?" demo-done":"");
+      var box=document.createElement("div");
+      var b=document.createElement("b");b.textContent=it.id+"　"+it.title;box.appendChild(b);
+      var m=document.createElement("small");m.textContent="負責人：成員 "+it.owner.replace("成員 ","")+"　下一步："+it.next;box.appendChild(m);
+      var line=document.createElement("div");line.style.marginTop=".4rem";
+      var due=today+it.off*DAY;
+      if(s==="overdue")line.appendChild(badge("逾期 "+Math.round((today-due)/DAY)+" 天","due","ti-alert-triangle"));
+      else if(s==="today")line.appendChild(badge("今天到期","","ti-bell"));
+      else if(s==="done")line.appendChild(badge("已完成","","ti-check"));
+      else line.appendChild(badge("進行中","","ti-loader"));
+      var d=document.createElement("small");d.textContent="到期日 "+fmt(due);line.appendChild(d);
+      box.appendChild(line);
+      li.appendChild(box);
+      var btn=document.createElement("button");btn.type="button";btn.className="btn";
+      var ic=document.createElement("i");ic.className="ti "+(it.done?"ti-arrow-back-up":"ti-check");ic.setAttribute("aria-hidden","true");btn.appendChild(ic);
+      btn.appendChild(document.createTextNode(it.done?"改回進行中":"標記完成"));
+      btn.addEventListener("click",function(){it.done=!it.done;render();});
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+  }
+  q.addEventListener("input",render);f.addEventListener("change",render);p.addEventListener("change",render);
+  render();
+})();
+</script>
+</body>
+</html>
